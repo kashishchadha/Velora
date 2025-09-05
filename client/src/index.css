@@ -6,3 +6,12 @@ body{
   overflow-x: hidden;
   font-family: "Montserrat",sans-serif;
 }
+.animatedButton {
+  animation: spin 10s linear infinite;
+}
+
+@keyframes spin {
+  100% {
+    transform: rotate(360deg);
+  }
+}
