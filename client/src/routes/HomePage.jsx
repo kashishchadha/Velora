@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import MainCategories from '../components/MainCategories'
 
 function HomePage() {
   return (
@@ -55,6 +56,8 @@ function HomePage() {
           </button>
         </Link>
       </div>
+
+      <MainCategories/>
     </div>
 
 
