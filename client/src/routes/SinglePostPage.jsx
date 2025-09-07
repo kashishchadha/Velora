@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from '../components/image'
 import { Link } from 'react-router-dom'
+import PostMenueActions from '../components/PostMenueActions'
 function SinglePostPage() {
   return (
     <div className='flex flex-col gap-8'>
@@ -30,6 +31,10 @@ function SinglePostPage() {
     Aliquid, eos temporibus eum commodi corporis doloremque architecto, qui maxime labore sint accusantium fugit. Quam, delectus officia molestias officiis dolor praesentium consequatur? Dolor animi nesciunt harum libero consequuntur sint non?</p>
 
 
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ipsa eligendi nobis odio eum autem? Nihil modi ipsa, repudiandae veniam, mollitia excepturi cupiditate tempore obcaecati, optio officiis molestias suscipit fugiat?
+    Aliquid, eos temporibus eum commodi corporis doloremque architecto, qui maxime labore sint accusantium fugit. Quam, delectus officia molestias officiis dolor praesentium consequatur? Dolor animi nesciunt harum libero consequuntur sint non?</p>
+
+
         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates ipsa eligendi nobis odio eum autem? Nihil modi ipsa, repudiandae veniam, mollitia excepturi cupiditate tempore obcaecati, optio officiis molestias suscipit fugiat?
     Aliquid, eos temporibus eum commodi corporis doloremque architecto, qui maxime labore sint accusantium fugit. Quam, delectus officia molestias officiis dolor praesentium consequatur? Dolor animi nesciunt harum libero consequuntur sint non?</p>
 
@@ -39,11 +44,13 @@ function SinglePostPage() {
  
   </div>
   <div className="px-4 h-max sticky top-8">
-    <h1>Author</h1>
-    <div className="t">
+    <h1 className=' mb-4 text-sm font-medium ' >Author</h1>
+    <div className=" flex flex-col gap-4">
+    <div className=" flex items-center gap-8 ">
       <Image src='plaintype/userImg.jpeg' className='w-12 h-12 rounded-full object-cover' w='48' h='48'/>
       <Link>John Doe</Link>
-      <p>Lorem ipsum dolor sit ametitgn vnninl</p>
+        </div>
+      <p className='text-sm text-gray-500 '>Lorem ipsum dolor sit ametitgn vnninl</p>
       <div className="flex gap-2">
         <Link>
         <Image src='plaintype/facebook.svg'/>
@@ -54,8 +61,21 @@ function SinglePostPage() {
          <Link>
         <Image src='plaintype/instagram.svg'/>
         </Link>
-      </div>
+    
     </div>
+    </div>
+    <PostMenueActions/>
+    <h1 className='mt-8 mb-4 text-sm font-medium '  >Categories</h1>
+    <div className="flex flex-col gap-2  text-sm">
+<Link className='underline'>All</Link>
+<Link className='underline' to='/'>Web Design</Link>
+<Link className='underline' to='/'>Development</Link>
+<Link className='underline' to='/'>Databases</Link>
+<Link className='underline' to='/'>Search Engines</Link>
+<Link className='underline' to='/'>Marketing</Link>
+    </div>
+    <h1 className='mt-8 mb-4 text-sm font-medium '>Search</h1>
+    <search/>
   </div>
 </div>
 
