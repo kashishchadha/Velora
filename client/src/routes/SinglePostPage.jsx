@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from '../components/image'
 import { Link } from 'react-router-dom'
+import Comments from '../components/Comments'
 import PostMenueActions from '../components/PostMenueActions'
 function SinglePostPage() {
   return (
@@ -48,7 +49,7 @@ function SinglePostPage() {
     <div className=" flex flex-col gap-4">
     <div className=" flex items-center gap-8 ">
       <Image src='plaintype/userImg.jpeg' className='w-12 h-12 rounded-full object-cover' w='48' h='48'/>
-      <Link>John Doe</Link>
+      <Link className='text-blue-800'>John Doe</Link>
         </div>
       <p className='text-sm text-gray-500 '>Lorem ipsum dolor sit ametitgn vnninl</p>
       <div className="flex gap-2">
@@ -79,7 +80,7 @@ function SinglePostPage() {
   </div>
 </div>
 
-
+<Comments/>
 </div>
   )
 }
