@@ -1,5 +1,6 @@
 import React from 'react'
 import Search from "./Search"
+import { Link } from 'react-router-dom'
 function SideMenu() {
   return (
   <div className="px-4 h-max sticky top-8">
@@ -9,7 +10,22 @@ function SideMenu() {
 
 
     <label htmlFor='' className='flex items-center gap-2 cursor-pointer'>
-        <input type="radio" name="sort" value="newest" className='appearance-none w-4 h-4 border-[1.5px] border-blue-800 cursor-pointer rounded-sm checked:bg-blue-800 '/>
+        <input type="radio" name="sort" value="newest" className='appearance-none w-4 h-4 border-[1.5px] bg-white border-blue-800 cursor-pointer rounded-sm checked:bg-blue-800 '/>
+        Newest
+    </label>
+
+        <label htmlFor='' className='flex items-center gap-2 cursor-pointer'>
+        <input type="radio" name="sort" value="popular" className='appearance-none w-4 h-4 border-[1.5px] border-blue-800 cursor-pointer rounded-sm bg-white checked:bg-blue-800 '/>
+        Most Popular
+    </label>
+
+        <label htmlFor='' className='flex items-center gap-2 cursor-pointer'>
+        <input type="radio" name="sort" value="trending" className='appearance-none w-4 h-4 border-[1.5px] border-blue-800 cursor-pointer rounded-sm bg-white checked:bg-blue-800 '/>
+        Trending
+    </label>
+        <label htmlFor='' className='flex items-center gap-2 cursor-pointer'>
+        <input type="radio" name="sort" value="oldest" className='appearance-none w-4 h-4 border-[1.5px] border-blue-800 cursor-pointer rounded-sm bg-white checked:bg-blue-800 '/>
+        Oldest
     </label>
 
     <h1 className='mt-8 mb-4 text-sm font-medium'>Categories</h1>

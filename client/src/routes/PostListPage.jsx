@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import PostList from '../components/PostList'
+import SideMenu from '../components/SideMenu';
 function PostListPage() {
   const [open,setOpen]=useState(false);
   return (
@@ -14,7 +15,7 @@ function PostListPage() {
           <PostList/>
         </div>
         <div className={`${open?"block":"hidden"} md:block`}>
-
+        <SideMenu/>
           
         </div>
       </div>
