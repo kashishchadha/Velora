@@ -1,6 +1,6 @@
 import mongoose from "mongoose"
 import { Schema } from "mongoose"
-const postSchema= new Schema()(
+const postSchema= new Schema(
     {
 
         user:{
@@ -35,7 +35,7 @@ isFeatured:{
     default:false,
 },
 visit:{
-    type:Boolean,
+    type:Number,
     default:0,
 },
 
