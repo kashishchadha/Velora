@@ -5,8 +5,25 @@ import CommentRouter from "./routes/comment.route.js"
 import PostRouter from "./routes/post.route.js"
 import webhookRouter from "./routes/webhook.route.js"
 import dotenv from "dotenv"
+import { clerkMiddleware,requireAuth } from '@clerk/express'
 const app=express()
+
 dotenv.config()
+app.use(clerkMiddleware());
+
+
+// app.get("/auth-state",(req,res)=>{
+//     const authState=req.auth;
+//     res.json(authState);
+// })
+
+// app.get("/protect",(req,res)=>{
+//     const {userId}=req.auth;
+//     if(!userId){
+//         return res.status(401).json("not authenticated")
+//     }
+//     res.status(200).json("content")
+// })
 app.use("/webhooks",webhookRouter)
 app.use(express.json())
 app.use("/users",UserRouter)
