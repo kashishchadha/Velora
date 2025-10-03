@@ -17,7 +17,15 @@ export const createPost=async(req,res)=>{
     if(!user){
         return res.status(404).json("User not found");
     }
-    const newpost=new Post({user:user._id,...req.body})
+    let slug=req.body.title.replace(/ /g,"-").toLowerCase();
+    let existingPost=await Post.findOne({slug});
+    let counter=2;
+    while(existingPost){
+        slug=`${slug}-${counter}`
+        existingPost=await Post.findOne({slug});
+        counter++;
+    }
+    const newpost=new Post({user:user._id,slug, ...req.body})
     const post=await newpost.save()
     res.status(200).json("post created")
 }

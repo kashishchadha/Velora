@@ -5,9 +5,11 @@ import CommentRouter from "./routes/comment.route.js"
 import PostRouter from "./routes/post.route.js"
 import webhookRouter from "./routes/webhook.route.js"
 import dotenv from "dotenv"
+import cors from "cors"
+
 import { clerkMiddleware,requireAuth } from '@clerk/express'
 const app=express()
-
+app.use(cors(process.env.CLIENT_URL));
 dotenv.config()
 app.use(clerkMiddleware());
 
