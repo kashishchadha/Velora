@@ -65,7 +65,17 @@ mutation.mutate(data)
           </select>
         </div>
 <textarea name='desc' className='p-2 rounded-xl bg-white shadow-md' placeholder='A Short Description'/>
+    <div className="flex flex-1 ">
+          <div className="flex flex-col gap-2 mr-2">
+            <Upload type="image" setProgress={setProgress} setData={setImg}>
+              🌆
+            </Upload>
+            <Upload type="video" setProgress={setProgress} setData={setVideo}>
+              ▶️
+            </Upload>
+          </div>
 <ReactQuill value={value} onChange={setValue} theme='snow' className='flex-1 rounded-xl bg-white shadow-md'/>
+</div>
 <button disable={mutation.isPending} className='bg-blue-800 text-white font-medium rounded-xl m-4 p-2 w-36  disabled:bg-blue-400 disabled:cursor-not-allowed'>{mutation.isPending?"Loading...":"Send"}</button>
 {mutation.isError && <span>{mutation.error.message}</span>}
       </form>

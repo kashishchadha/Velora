@@ -12,6 +12,7 @@
     "@clerk/clerk-react": "^5.47.0",
     "@tanstack/react-query": "^5.90.2",
     "axios": "^1.12.2",
+    "imagekit": "^6.0.0",
     "imagekitio-react": "^4.3.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",

@@ -1,6 +1,7 @@
 import express from "express"
-import {getPost,getPosts,createPost,deletePost} from "../controller/post.controller.js"
+import {getPost,getPosts,createPost,deletePost,uploadAuth} from "../controller/post.controller.js"
 const router=express.Router()
+router.get("/upload-auth",uploadAuth)
 router.get("/", getPost)
 router.get("/:slug",getPosts)
 router.post("/",createPost)
