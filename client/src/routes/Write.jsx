@@ -36,6 +36,8 @@ function Write() {
   const navigate=useNavigate()
   const {isLoaded,isSignedIn}=useUser();
   const [value,setValue]=useState('');
+  const [cover,setCover]=useState('');
+  const [progress,setProgress]=useState('');
   const {getToken}=useAuth();
   const mutation = useMutation({
     mutationFn:async (newPost) => {
@@ -78,6 +80,11 @@ const onError=(err)=>{
 };
 const onSuccess=(res)=>{
   console.log(res)
+  setCover(res)
+ }
+ const onUploadProgress=(progress)=>{
+console.log(progress);
+setProgress(Math.round(progress.loaded/progress.total)*100)
  }
 
   return (
@@ -93,6 +100,7 @@ const onSuccess=(res)=>{
         useUniqueFileName
         onError={onError}
         onSuccess={onSuccess}
+        onUploadProgress={onUploadProgress}
    
       />
    
@@ -123,6 +131,7 @@ const onSuccess=(res)=>{
 <ReactQuill value={value} onChange={setValue} theme='snow' className='flex-1 rounded-xl bg-white shadow-md'/>
 </div>
 <button disabled={mutation.isPending} className='bg-blue-800 text-white font-medium rounded-xl m-4 p-2 w-36  disabled:bg-blue-400 disabled:cursor-not-allowed'>{mutation.isPending?"Loading...":"Send"}</button>
+{"Progress:"+progress}
 {mutation.isError && <span>{mutation.error.message}</span>}
       </form>
     </div>
