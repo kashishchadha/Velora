@@ -10,6 +10,7 @@ export const getPosts=async(req,res)=>{
     res.status(200).json(post)
 }
 export const createPost=async(req,res)=>{
+    try{
     const clerkUserId=req.auth.userId;
     if(!clerkUserId){
         return res.status(401).json("not authenticated");
@@ -29,6 +30,10 @@ export const createPost=async(req,res)=>{
     const newpost=new Post({user:user._id,slug, ...req.body})
     const post=await newpost.save()
     res.status(200).json("post created")
+}catch(error){
+           console.error("Create post error:", error);
+        res.status(500).json({ message: error.message });
+}
 }
 export const deletePost=async(req,res)=>{
      const clerkUserId=req.auth.userId;
@@ -47,7 +52,12 @@ urlEndpoint: process.env.IK_URL_ENDPOINT,
 publicKey: process.env.IK_PUBLIC_KEY,
 privateKey: process.env.IK_PRIVATE_KEY,
 });
-export const uploadAuth=async (req,res)=>{
-    const result=imagekit.getAuthenticationParameter();
-    res.send(result);
+export const uploadAuth = async (req, res) => {
+    try {
+        const result = imagekit.getAuthenticationParameters();
+        res.send(result);
+    } catch (error) {
+        console.error("ImageKit auth error:", error);
+        res.status(500).json({ message: error.message });
+    }
 }
