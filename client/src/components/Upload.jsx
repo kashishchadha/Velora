@@ -1,5 +1,6 @@
 import { IKContext,IKUpload } from "imagekitio-react";
 import { toast } from "react-toastify";
+import {useRef} from 'react';
 const authenticator = async () => {
   try {
     const response = await fetch(
@@ -49,9 +50,10 @@ setProgress(Math.round(progress.loaded/progress.total)*100)
         onUploadProgress={onUploadProgress}
         className="hidden"
         ref={ref}
+         accept={`${type}/*`}
    
       />
-   <div className="cursor-pointer" onClick={()=> ref.current.click()}></div>
+   <div className="cursor-pointer" onClick={()=> ref.current.click()}>{children}</div>
     </IKContext>  
     )
 }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useState } from 'react';
 import { useAuth } from '@clerk/clerk-react';
 import ReactQuill from "react-quill-new"
@@ -19,6 +19,20 @@ function Write() {
   const [value,setValue]=useState('');
   const [cover,setCover]=useState('');
   const [progress,setProgress]=useState('');
+  const [img,setImg]=useState('');
+  const [video,setVideo]=useState('');
+
+ useEffect(() => {
+    img && setValue((prev) => prev + `<p><image src="${img.url}"/></p>`);
+  }, [img]);
+
+  useEffect(() => {
+    video &&
+      setValue(
+        (prev) => prev + `<p><iframe class="ql-video" src="${video.url}"/></p>`
+      );
+  }, [video]);
+
   const {getToken}=useAuth();
   const mutation = useMutation({
     mutationFn:async (newPost) => {
@@ -46,6 +60,7 @@ e.preventDefault();
 const formData=new FormData(e.target)
 
 const data={
+  img:cover.filePath || "",
   title:formData.get("title"),
   category:formData.get("category"),
   desc:formData.get("desc"),
@@ -79,15 +94,15 @@ mutation.mutate(data)
 <textarea name='desc' className='p-2 rounded-xl bg-white shadow-md' placeholder='A Short Description'/>
     <div className="flex flex-1 ">
           <div className="flex flex-col gap-2 mr-2">
-            <div>
-🌆
-            </div>
-            <div>
- ▶️
-            </div>
+            <Upload type="image" setProgress={setProgress} setData={setImg}>
+              🌆
+            </Upload>
+            <Upload type="video" setProgress={setProgress} setData={setVideo}>
+              ▶️
+            </Upload>
         
           </div>
-<ReactQuill value={value} onChange={setValue} theme='snow' className='flex-1 rounded-xl bg-white shadow-md'/>
+<ReactQuill value={value} onChange={setValue} theme='snow' className='flex-1 rounded-xl bg-white shadow-md' readOnly={0 < progress && progress < 100}/>
 </div>
 <button disabled={mutation.isPending || (0<progress && progress < 100)} className='bg-blue-800 text-white font-medium rounded-xl m-4 p-2 w-36  disabled:bg-blue-400 disabled:cursor-not-allowed'>{mutation.isPending?"Loading...":"Send"}</button>
 {"Progress:"+progress}
