@@ -1,11 +1,18 @@
 import Post from "../models/post.model.js"
 import User from "../models/user.model.js"
 import ImageKit from "imagekit"
-export const getPost=async(req,res)=>{
-    const post=await Post.find();
-    res.status(200).json(post)
-}
 export const getPosts=async(req,res)=>{
+        const page=parseInt(req.query.page) || 1;
+    const limit=parseInt(req.query.limit) || 2;
+    const post=await Post.find().limit(limit).skip(page-1)*5;
+
+    const totalPosts=await Post.countDocuments();
+    const hasMore=page*limit<totalPosts;
+
+    res.status(200).json({post,hasMore})
+}
+export const getPost=async(req,res)=>{
+
     const post=await Post.find({slug:req.params.slug});
     res.status(200).json(post)
 }

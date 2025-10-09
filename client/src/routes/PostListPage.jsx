@@ -2,22 +2,32 @@ import React, { useState } from 'react'
 import PostList from '../components/PostList'
 import SideMenu from '../components/SideMenu';
 import axios from 'axios'
-import { useQuery} from '@tanstack/react-query'
-const fetchPost=async()=>{
-const res= await axios.get(`${import.meta.env.VITE_API_URL}/posts`);
+import { useInfiniteQuery, useQuery} from '@tanstack/react-query'
+const fetchPosts=async(pageParam)=>{
+const res= await axios.get(`${import.meta.env.VITE_API_URL}/posts`,{
+  params:{page:pageParam},
+});
 return res.data;
 };
 function PostListPage() {
-
-   const { isPending, error, data } = useQuery({
-    queryKey: ['repoData'],
-    queryFn: () =>fetchPost(),
-   
+ const {
+    data,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isFetching,
+    isFetchingNextPage,
+    status,
+  } = useInfiniteQuery({
+    queryKey: ['posts'],
+    queryFn:({pageParam=1})=>fetchPosts(pageParam),
+    initialPageParam: 1,
+    getNextPageParam: (lastPage, pages) => lastPage.hasMore ? pages.length + 1 : undefined,
   })
+console.log(data);
+  if (status==="loading") return 'Loading...'
 
-  if (isPending) return 'Loading...'
-
-  if (error) return 'An error has occurred: ' + error.message
+  if (status==="error") return 'An error has occurred: ' + error.message
 
 
   
