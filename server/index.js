@@ -5,7 +5,9 @@ import CommentRouter from "./routes/comment.route.js"
 import PostRouter from "./routes/post.route.js"
 import webhookRoter from "./routes/webhook.route.js"
 import {clerkMiddleware} from "@clerk/express"
+import cors from 'cors'
 const app=express()
+app.use(cors(process.env.CLIENT_URL))
 app.use(clerkMiddleware())
 app.use("/webhooks",webhookRoter)
 
