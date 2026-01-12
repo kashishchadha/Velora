@@ -1,16 +1,23 @@
 // this file is @generated
 
-import { ApplicationIn, ApplicationInSerializer } from "../models/applicationIn";
-import { ApplicationOut, ApplicationOutSerializer } from "../models/applicationOut";
-import { ApplicationPatch, ApplicationPatchSerializer } from "../models/applicationPatch";
+import { type ApplicationIn, ApplicationInSerializer } from "../models/applicationIn";
+import { type ApplicationOut, ApplicationOutSerializer } from "../models/applicationOut";
 import {
-  ListResponseApplicationOut,
+  type ApplicationPatch,
+  ApplicationPatchSerializer,
+} from "../models/applicationPatch";
+import {
+  type ListResponseApplicationOut,
   ListResponseApplicationOutSerializer,
 } from "../models/listResponseApplicationOut";
-import { Ordering } from "../models/ordering";
-import { HttpMethod, SvixRequest, SvixRequestContext } from "../request";
+import type { Ordering } from "../models/ordering";
+import { HttpMethod, SvixRequest, type SvixRequestContext } from "../request";
 
 export interface ApplicationListOptions {
+  /** Exclude applications that have no endpoints. Default is false. */
+  excludeAppsWithNoEndpoints?: boolean;
+  /** Exclude applications that have only disabled endpoints. Default is false. */
+  excludeAppsWithDisabledEndpoints?: boolean;
   /** Limit the number of returned items */
   limit?: number;
   /** The iterator returned from a prior invocation */
@@ -30,9 +37,13 @@ export class Application {
   public list(options?: ApplicationListOptions): Promise<ListResponseApplicationOut> {
     const request = new SvixRequest(HttpMethod.GET, "/api/v1/app");
 
-    request.setQueryParam("limit", options?.limit);
-    request.setQueryParam("iterator", options?.iterator);
-    request.setQueryParam("order", options?.order);
+    request.setQueryParams({
+      exclude_apps_with_no_endpoints: options?.excludeAppsWithNoEndpoints,
+      exclude_apps_with_disabled_endpoints: options?.excludeAppsWithDisabledEndpoints,
+      limit: options?.limit,
+      iterator: options?.iterator,
+      order: options?.order,
+    });
 
     return request.send(
       this.requestCtx,

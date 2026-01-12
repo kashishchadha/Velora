@@ -1,16 +1,15 @@
 // this file is @generated
-/* eslint @typescript-eslint/no-explicit-any: 0 */
-/* eslint @typescript-eslint/no-empty-object-type: 0 */
-/* eslint @typescript-eslint/no-unused-vars: 0 */
+
+// biome-ignore-all lint/suspicious/noEmptyInterface: backwards compat
 
 export interface VeriffConfigOut {}
 
 export const VeriffConfigOutSerializer = {
-  _fromJsonObject(object: any): VeriffConfigOut {
+  _fromJsonObject(_object: any): VeriffConfigOut {
     return {};
   },
 
-  _toJsonObject(self: VeriffConfigOut): any {
+  _toJsonObject(_self: VeriffConfigOut): any {
     return {};
   },
 };

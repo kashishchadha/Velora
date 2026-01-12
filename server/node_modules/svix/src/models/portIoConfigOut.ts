@@ -1,16 +1,15 @@
 // this file is @generated
-/* eslint @typescript-eslint/no-explicit-any: 0 */
-/* eslint @typescript-eslint/no-empty-object-type: 0 */
-/* eslint @typescript-eslint/no-unused-vars: 0 */
+
+// biome-ignore-all lint/suspicious/noEmptyInterface: backwards compat
 
 export interface PortIoConfigOut {}
 
 export const PortIoConfigOutSerializer = {
-  _fromJsonObject(object: any): PortIoConfigOut {
+  _fromJsonObject(_object: any): PortIoConfigOut {
     return {};
   },
 
-  _toJsonObject(self: PortIoConfigOut): any {
+  _toJsonObject(_self: PortIoConfigOut): any {
     return {};
   },
 };

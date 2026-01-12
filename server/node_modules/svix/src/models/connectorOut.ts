@@ -1,61 +1,65 @@
 // this file is @generated
-/* eslint @typescript-eslint/no-explicit-any: 0 */
-import { ConnectorKind, ConnectorKindSerializer } from "./connectorKind";
+import { type ConnectorKind, ConnectorKindSerializer } from "./connectorKind";
+import { type ConnectorProduct, ConnectorProductSerializer } from "./connectorProduct";
 
 export interface ConnectorOut {
+  allowedEventTypes?: string[] | null;
   createdAt: Date;
   description: string;
-  featureFlag?: string | null;
   featureFlags?: string[] | null;
-  filterTypes?: string[] | null;
   /** The Connector's ID. */
   id: string;
   instructions: string;
-  instructionsLink?: string | null;
   kind: ConnectorKind;
-  logo: string;
+  logo?: string | null;
   name: string;
   /** The Environment's ID. */
   orgId: string;
+  productType: ConnectorProduct;
   transformation: string;
+  transformationUpdatedAt: Date;
+  /** The Connector's UID. */
+  uid?: string | null;
   updatedAt: Date;
 }
 
 export const ConnectorOutSerializer = {
   _fromJsonObject(object: any): ConnectorOut {
     return {
+      allowedEventTypes: object["allowedEventTypes"],
       createdAt: new Date(object["createdAt"]),
       description: object["description"],
-      featureFlag: object["featureFlag"],
       featureFlags: object["featureFlags"],
-      filterTypes: object["filterTypes"],
       id: object["id"],
       instructions: object["instructions"],
-      instructionsLink: object["instructionsLink"],
       kind: ConnectorKindSerializer._fromJsonObject(object["kind"]),
       logo: object["logo"],
       name: object["name"],
       orgId: object["orgId"],
+      productType: ConnectorProductSerializer._fromJsonObject(object["productType"]),
       transformation: object["transformation"],
+      transformationUpdatedAt: new Date(object["transformationUpdatedAt"]),
+      uid: object["uid"],
       updatedAt: new Date(object["updatedAt"]),
     };
   },
 
   _toJsonObject(self: ConnectorOut): any {
     return {
+      allowedEventTypes: self.allowedEventTypes,
       createdAt: self.createdAt,
       description: self.description,
-      featureFlag: self.featureFlag,
       featureFlags: self.featureFlags,
-      filterTypes: self.filterTypes,
       id: self.id,
       instructions: self.instructions,
-      instructionsLink: self.instructionsLink,
       kind: ConnectorKindSerializer._toJsonObject(self.kind),
       logo: self.logo,
       name: self.name,
       orgId: self.orgId,
+      productType: ConnectorProductSerializer._toJsonObject(self.productType),
       transformation: self.transformation,
+      transformationUpdatedAt: self.transformationUpdatedAt,
+      uid: self.uid,
       updatedAt: self.updatedAt,
     };
   },

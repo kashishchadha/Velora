@@ -1,26 +1,25 @@
 // this file is @generated
-/* eslint @typescript-eslint/no-explicit-any: 0 */
-import { AdobeSignConfig, AdobeSignConfigSerializer } from "./adobeSignConfig";
-import { AirwallexConfig, AirwallexConfigSerializer } from "./airwallexConfig";
-import { CheckbookConfig, CheckbookConfigSerializer } from "./checkbookConfig";
-import { CronConfig, CronConfigSerializer } from "./cronConfig";
-import { DocusignConfig, DocusignConfigSerializer } from "./docusignConfig";
-import { EasypostConfig, EasypostConfigSerializer } from "./easypostConfig";
-import { GithubConfig, GithubConfigSerializer } from "./githubConfig";
-import { HubspotConfig, HubspotConfigSerializer } from "./hubspotConfig";
-import { OrumIoConfig, OrumIoConfigSerializer } from "./orumIoConfig";
-import { PandaDocConfig, PandaDocConfigSerializer } from "./pandaDocConfig";
-import { PortIoConfig, PortIoConfigSerializer } from "./portIoConfig";
-import { RutterConfig, RutterConfigSerializer } from "./rutterConfig";
-import { SegmentConfig, SegmentConfigSerializer } from "./segmentConfig";
-import { ShopifyConfig, ShopifyConfigSerializer } from "./shopifyConfig";
-import { SlackConfig, SlackConfigSerializer } from "./slackConfig";
-import { StripeConfig, StripeConfigSerializer } from "./stripeConfig";
-import { SvixConfig, SvixConfigSerializer } from "./svixConfig";
-import { TelnyxConfig, TelnyxConfigSerializer } from "./telnyxConfig";
-import { VapiConfig, VapiConfigSerializer } from "./vapiConfig";
-import { VeriffConfig, VeriffConfigSerializer } from "./veriffConfig";
-import { ZoomConfig, ZoomConfigSerializer } from "./zoomConfig";
+import { type AdobeSignConfig, AdobeSignConfigSerializer } from "./adobeSignConfig";
+import { type AirwallexConfig, AirwallexConfigSerializer } from "./airwallexConfig";
+import { type CheckbookConfig, CheckbookConfigSerializer } from "./checkbookConfig";
+import { type CronConfig, CronConfigSerializer } from "./cronConfig";
+import { type DocusignConfig, DocusignConfigSerializer } from "./docusignConfig";
+import { type EasypostConfig, EasypostConfigSerializer } from "./easypostConfig";
+import { type GithubConfig, GithubConfigSerializer } from "./githubConfig";
+import { type HubspotConfig, HubspotConfigSerializer } from "./hubspotConfig";
+import { type OrumIoConfig, OrumIoConfigSerializer } from "./orumIoConfig";
+import { type PandaDocConfig, PandaDocConfigSerializer } from "./pandaDocConfig";
+import { type PortIoConfig, PortIoConfigSerializer } from "./portIoConfig";
+import { type RutterConfig, RutterConfigSerializer } from "./rutterConfig";
+import { type SegmentConfig, SegmentConfigSerializer } from "./segmentConfig";
+import { type ShopifyConfig, ShopifyConfigSerializer } from "./shopifyConfig";
+import { type SlackConfig, SlackConfigSerializer } from "./slackConfig";
+import { type StripeConfig, StripeConfigSerializer } from "./stripeConfig";
+import { type SvixConfig, SvixConfigSerializer } from "./svixConfig";
+import { type TelnyxConfig, TelnyxConfigSerializer } from "./telnyxConfig";
+import { type VapiConfig, VapiConfigSerializer } from "./vapiConfig";
+import { type VeriffConfig, VeriffConfigSerializer } from "./veriffConfig";
+import { type ZoomConfig, ZoomConfigSerializer } from "./zoomConfig";
 interface _IngestSourceInFields {
   metadata?: { [key: string]: string };
   name: string;
@@ -28,7 +27,7 @@ interface _IngestSourceInFields {
   uid?: string | null;
 }
 
-/* eslint @typescript-eslint/no-empty-object-type: 0 */
+// biome-ignore lint/suspicious/noEmptyInterface: backwards compat
 interface IngestSourceInGenericWebhookConfig {}
 
 interface IngestSourceInGenericWebhook {
@@ -351,6 +350,7 @@ export const IngestSourceInSerializer = {
   },
 
   _toJsonObject(self: IngestSourceIn): any {
+    // biome-ignore lint/suspicious/noImplicitAnyLet: the return type needs to be any
     let config;
     switch (self.type) {
       case "generic-webhook":

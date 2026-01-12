@@ -1,54 +1,54 @@
 // this file is @generated
 
 import {
-  EndpointHeadersIn,
+  type EndpointHeadersIn,
   EndpointHeadersInSerializer,
 } from "../models/endpointHeadersIn";
 import {
-  EndpointHeadersOut,
+  type EndpointHeadersOut,
   EndpointHeadersOutSerializer,
 } from "../models/endpointHeadersOut";
 import {
-  EndpointHeadersPatchIn,
+  type EndpointHeadersPatchIn,
   EndpointHeadersPatchInSerializer,
 } from "../models/endpointHeadersPatchIn";
-import { EndpointIn, EndpointInSerializer } from "../models/endpointIn";
-import { EndpointOut, EndpointOutSerializer } from "../models/endpointOut";
-import { EndpointPatch, EndpointPatchSerializer } from "../models/endpointPatch";
+import { type EndpointIn, EndpointInSerializer } from "../models/endpointIn";
+import { type EndpointOut, EndpointOutSerializer } from "../models/endpointOut";
+import { type EndpointPatch, EndpointPatchSerializer } from "../models/endpointPatch";
 import {
-  EndpointSecretOut,
+  type EndpointSecretOut,
   EndpointSecretOutSerializer,
 } from "../models/endpointSecretOut";
 import {
-  EndpointSecretRotateIn,
+  type EndpointSecretRotateIn,
   EndpointSecretRotateInSerializer,
 } from "../models/endpointSecretRotateIn";
-import { EndpointStats, EndpointStatsSerializer } from "../models/endpointStats";
+import { type EndpointStats, EndpointStatsSerializer } from "../models/endpointStats";
 import {
-  EndpointTransformationIn,
+  type EndpointTransformationIn,
   EndpointTransformationInSerializer,
 } from "../models/endpointTransformationIn";
 import {
-  EndpointTransformationOut,
+  type EndpointTransformationOut,
   EndpointTransformationOutSerializer,
 } from "../models/endpointTransformationOut";
 import {
-  EndpointTransformationPatch,
+  type EndpointTransformationPatch,
   EndpointTransformationPatchSerializer,
 } from "../models/endpointTransformationPatch";
-import { EndpointUpdate, EndpointUpdateSerializer } from "../models/endpointUpdate";
-import { EventExampleIn, EventExampleInSerializer } from "../models/eventExampleIn";
+import { type EndpointUpdate, EndpointUpdateSerializer } from "../models/endpointUpdate";
+import { type EventExampleIn, EventExampleInSerializer } from "../models/eventExampleIn";
 import {
-  ListResponseEndpointOut,
+  type ListResponseEndpointOut,
   ListResponseEndpointOutSerializer,
 } from "../models/listResponseEndpointOut";
-import { MessageOut, MessageOutSerializer } from "../models/messageOut";
-import { Ordering } from "../models/ordering";
-import { RecoverIn, RecoverInSerializer } from "../models/recoverIn";
-import { RecoverOut, RecoverOutSerializer } from "../models/recoverOut";
-import { ReplayIn, ReplayInSerializer } from "../models/replayIn";
-import { ReplayOut, ReplayOutSerializer } from "../models/replayOut";
-import { HttpMethod, SvixRequest, SvixRequestContext } from "../request";
+import { type MessageOut, MessageOutSerializer } from "../models/messageOut";
+import type { Ordering } from "../models/ordering";
+import { type RecoverIn, RecoverInSerializer } from "../models/recoverIn";
+import { type RecoverOut, RecoverOutSerializer } from "../models/recoverOut";
+import { type ReplayIn, ReplayInSerializer } from "../models/replayIn";
+import { type ReplayOut, ReplayOutSerializer } from "../models/replayOut";
+import { HttpMethod, SvixRequest, type SvixRequestContext } from "../request";
 
 export interface EndpointListOptions {
   /** Limit the number of returned items */
@@ -97,9 +97,11 @@ export class Endpoint {
     const request = new SvixRequest(HttpMethod.GET, "/api/v1/app/{app_id}/endpoint");
 
     request.setPathParam("app_id", appId);
-    request.setQueryParam("limit", options?.limit);
-    request.setQueryParam("iterator", options?.iterator);
-    request.setQueryParam("order", options?.order);
+    request.setQueryParams({
+      limit: options?.limit,
+      iterator: options?.iterator,
+      order: options?.order,
+    });
 
     return request.send(
       this.requestCtx,
@@ -259,6 +261,18 @@ export class Endpoint {
    * Resend all failed messages since a given time.
    *
    * Messages that were sent successfully, even if failed initially, are not resent.
+   *
+   * A completed task will return a payload like the following:
+   * ```json
+   * {
+   *   "id": "qtask_33qen93MNuelBAq1T9G7eHLJRsF",
+   *   "status": "finished",
+   *   "task": "endpoint.recover",
+   *   "data": {
+   *     "messagesSent": 2
+   *   }
+   * }
+   * ```
    */
   public recover(
     appId: string,
@@ -284,6 +298,18 @@ export class Endpoint {
    *
    * Only messages that were created after `since` will be sent.
    * Messages that were previously sent to the endpoint are not resent.
+   *
+   * A completed task will return a payload like the following:
+   * ```json
+   * {
+   *   "id": "qtask_33qen93MNuelBAq1T9G7eHLJRsF",
+   *   "status": "finished",
+   *   "task": "endpoint.replay",
+   *   "data": {
+   *     "messagesSent": 2
+   *   }
+   * }
+   * ```
    */
   public replayMissing(
     appId: string,
@@ -381,8 +407,10 @@ export class Endpoint {
 
     request.setPathParam("app_id", appId);
     request.setPathParam("endpoint_id", endpointId);
-    request.setQueryParam("since", options?.since);
-    request.setQueryParam("until", options?.until);
+    request.setQueryParams({
+      since: options?.since,
+      until: options?.until,
+    });
 
     return request.send(this.requestCtx, EndpointStatsSerializer._fromJsonObject);
   }

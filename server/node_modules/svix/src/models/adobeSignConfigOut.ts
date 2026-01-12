@@ -1,16 +1,15 @@
 // this file is @generated
-/* eslint @typescript-eslint/no-explicit-any: 0 */
-/* eslint @typescript-eslint/no-empty-object-type: 0 */
-/* eslint @typescript-eslint/no-unused-vars: 0 */
+
+// biome-ignore-all lint/suspicious/noEmptyInterface: backwards compat
 
 export interface AdobeSignConfigOut {}
 
 export const AdobeSignConfigOutSerializer = {
-  _fromJsonObject(object: any): AdobeSignConfigOut {
+  _fromJsonObject(_object: any): AdobeSignConfigOut {
     return {};
   },
 
-  _toJsonObject(self: AdobeSignConfigOut): any {
+  _toJsonObject(_self: AdobeSignConfigOut): any {
     return {};
   },
 };

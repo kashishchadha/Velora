@@ -1,18 +1,18 @@
 // this file is @generated
 
 import {
-  PollingEndpointConsumerSeekIn,
+  type PollingEndpointConsumerSeekIn,
   PollingEndpointConsumerSeekInSerializer,
 } from "../models/pollingEndpointConsumerSeekIn";
 import {
-  PollingEndpointConsumerSeekOut,
+  type PollingEndpointConsumerSeekOut,
   PollingEndpointConsumerSeekOutSerializer,
 } from "../models/pollingEndpointConsumerSeekOut";
 import {
-  PollingEndpointOut,
+  type PollingEndpointOut,
   PollingEndpointOutSerializer,
 } from "../models/pollingEndpointOut";
-import { HttpMethod, SvixRequest, SvixRequestContext } from "../request";
+import { HttpMethod, SvixRequest, type SvixRequestContext } from "../request";
 
 export interface MessagePollerPollOptions {
   /** Limit the number of returned items */
@@ -53,11 +53,13 @@ export class MessagePoller {
 
     request.setPathParam("app_id", appId);
     request.setPathParam("sink_id", sinkId);
-    request.setQueryParam("limit", options?.limit);
-    request.setQueryParam("iterator", options?.iterator);
-    request.setQueryParam("event_type", options?.eventType);
-    request.setQueryParam("channel", options?.channel);
-    request.setQueryParam("after", options?.after);
+    request.setQueryParams({
+      limit: options?.limit,
+      iterator: options?.iterator,
+      event_type: options?.eventType,
+      channel: options?.channel,
+      after: options?.after,
+    });
 
     return request.send(this.requestCtx, PollingEndpointOutSerializer._fromJsonObject);
   }
@@ -80,8 +82,10 @@ export class MessagePoller {
     request.setPathParam("app_id", appId);
     request.setPathParam("sink_id", sinkId);
     request.setPathParam("consumer_id", consumerId);
-    request.setQueryParam("limit", options?.limit);
-    request.setQueryParam("iterator", options?.iterator);
+    request.setQueryParams({
+      limit: options?.limit,
+      iterator: options?.iterator,
+    });
 
     return request.send(this.requestCtx, PollingEndpointOutSerializer._fromJsonObject);
   }

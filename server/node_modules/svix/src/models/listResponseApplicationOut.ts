@@ -1,6 +1,5 @@
 // this file is @generated
-/* eslint @typescript-eslint/no-explicit-any: 0 */
-import { ApplicationOut, ApplicationOutSerializer } from "./applicationOut";
+import { type ApplicationOut, ApplicationOutSerializer } from "./applicationOut";
 
 export interface ListResponseApplicationOut {
   data: ApplicationOut[];

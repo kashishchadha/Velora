@@ -1,6 +1,5 @@
 // this file is @generated
-/* eslint @typescript-eslint/no-explicit-any: 0 */
-import { IngestSourceOut, IngestSourceOutSerializer } from "./ingestSourceOut";
+import { type IngestSourceOut, IngestSourceOutSerializer } from "./ingestSourceOut";
 
 export interface ListResponseIngestSourceOut {
   data: IngestSourceOut[];

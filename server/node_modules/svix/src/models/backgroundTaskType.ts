@@ -1,5 +1,4 @@
 // this file is @generated
-/* eslint @typescript-eslint/no-explicit-any: 0 */
 
 export enum BackgroundTaskType {
   EndpointReplay = "endpoint.replay",
@@ -9,6 +8,7 @@ export enum BackgroundTaskType {
   SdkGenerate = "sdk.generate",
   EventTypeAggregate = "event-type.aggregate",
   ApplicationPurgeContent = "application.purge_content",
+  EndpointBulkReplay = "endpoint.bulk_replay",
 }
 
 export const BackgroundTaskTypeSerializer = {

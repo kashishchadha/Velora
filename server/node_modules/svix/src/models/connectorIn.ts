@@ -1,55 +1,55 @@
 // this file is @generated
-/* eslint @typescript-eslint/no-explicit-any: 0 */
-import { ConnectorKind, ConnectorKindSerializer } from "./connectorKind";
+import { type ConnectorKind, ConnectorKindSerializer } from "./connectorKind";
+import { type ConnectorProduct, ConnectorProductSerializer } from "./connectorProduct";
 
 export interface ConnectorIn {
+  allowedEventTypes?: string[] | null;
   description?: string;
-  /**
-   * Deprecated - prefer featureFlags instead.
-   *
-   * @deprecated
-   */
-  featureFlag?: string | null;
   featureFlags?: string[] | null;
-  filterTypes?: string[] | null;
   instructions?: string;
-  instructionsLink?: string | null;
   kind?: ConnectorKind;
-  logo: string;
+  logo?: string | null;
   name: string;
+  productType?: ConnectorProduct | null;
   transformation: string;
+  /** The Connector's UID. */
+  uid?: string | null;
 }
 
 export const ConnectorInSerializer = {
   _fromJsonObject(object: any): ConnectorIn {
     return {
+      allowedEventTypes: object["allowedEventTypes"],
       description: object["description"],
-      featureFlag: object["featureFlag"],
       featureFlags: object["featureFlags"],
-      filterTypes: object["filterTypes"],
       instructions: object["instructions"],
-      instructionsLink: object["instructionsLink"],
       kind: object["kind"]
         ? ConnectorKindSerializer._fromJsonObject(object["kind"])
         : undefined,
       logo: object["logo"],
       name: object["name"],
+      productType: object["productType"]
+        ? ConnectorProductSerializer._fromJsonObject(object["productType"])
+        : undefined,
       transformation: object["transformation"],
+      uid: object["uid"],
     };
   },
 
   _toJsonObject(self: ConnectorIn): any {
     return {
+      allowedEventTypes: self.allowedEventTypes,
       description: self.description,
-      featureFlag: self.featureFlag,
       featureFlags: self.featureFlags,
-      filterTypes: self.filterTypes,
       instructions: self.instructions,
-      instructionsLink: self.instructionsLink,
       kind: self.kind ? ConnectorKindSerializer._toJsonObject(self.kind) : undefined,
       logo: self.logo,
       name: self.name,
+      productType: self.productType
+        ? ConnectorProductSerializer._toJsonObject(self.productType)
+        : undefined,
       transformation: self.transformation,
+      uid: self.uid,
     };
   },
 };

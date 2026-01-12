@@ -1,23 +1,26 @@
 // this file is @generated
 
 import {
-  EventTypeImportOpenApiIn,
+  type EventTypeImportOpenApiIn,
   EventTypeImportOpenApiInSerializer,
 } from "../models/eventTypeImportOpenApiIn";
 import {
-  EventTypeImportOpenApiOut,
+  type EventTypeImportOpenApiOut,
   EventTypeImportOpenApiOutSerializer,
 } from "../models/eventTypeImportOpenApiOut";
-import { EventTypeIn, EventTypeInSerializer } from "../models/eventTypeIn";
-import { EventTypeOut, EventTypeOutSerializer } from "../models/eventTypeOut";
-import { EventTypePatch, EventTypePatchSerializer } from "../models/eventTypePatch";
-import { EventTypeUpdate, EventTypeUpdateSerializer } from "../models/eventTypeUpdate";
+import { type EventTypeIn, EventTypeInSerializer } from "../models/eventTypeIn";
+import { type EventTypeOut, EventTypeOutSerializer } from "../models/eventTypeOut";
+import { type EventTypePatch, EventTypePatchSerializer } from "../models/eventTypePatch";
 import {
-  ListResponseEventTypeOut,
+  type EventTypeUpdate,
+  EventTypeUpdateSerializer,
+} from "../models/eventTypeUpdate";
+import {
+  type ListResponseEventTypeOut,
   ListResponseEventTypeOutSerializer,
 } from "../models/listResponseEventTypeOut";
-import { Ordering } from "../models/ordering";
-import { HttpMethod, SvixRequest, SvixRequestContext } from "../request";
+import type { Ordering } from "../models/ordering";
+import { HttpMethod, SvixRequest, type SvixRequestContext } from "../request";
 
 export interface EventTypeListOptions {
   /** Limit the number of returned items */
@@ -52,11 +55,13 @@ export class EventType {
   public list(options?: EventTypeListOptions): Promise<ListResponseEventTypeOut> {
     const request = new SvixRequest(HttpMethod.GET, "/api/v1/event-type");
 
-    request.setQueryParam("limit", options?.limit);
-    request.setQueryParam("iterator", options?.iterator);
-    request.setQueryParam("order", options?.order);
-    request.setQueryParam("include_archived", options?.includeArchived);
-    request.setQueryParam("with_content", options?.withContent);
+    request.setQueryParams({
+      limit: options?.limit,
+      iterator: options?.iterator,
+      order: options?.order,
+      include_archived: options?.includeArchived,
+      with_content: options?.withContent,
+    });
 
     return request.send(
       this.requestCtx,
@@ -150,7 +155,9 @@ export class EventType {
     );
 
     request.setPathParam("event_type_name", eventTypeName);
-    request.setQueryParam("expunge", options?.expunge);
+    request.setQueryParams({
+      expunge: options?.expunge,
+    });
 
     return request.sendNoResponseBody(this.requestCtx);
   }

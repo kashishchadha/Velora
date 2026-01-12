@@ -1,16 +1,15 @@
 // this file is @generated
-/* eslint @typescript-eslint/no-explicit-any: 0 */
-/* eslint @typescript-eslint/no-empty-object-type: 0 */
-/* eslint @typescript-eslint/no-unused-vars: 0 */
+
+// biome-ignore-all lint/suspicious/noEmptyInterface: backwards compat
 
 export interface GithubConfigOut {}
 
 export const GithubConfigOutSerializer = {
-  _fromJsonObject(object: any): GithubConfigOut {
+  _fromJsonObject(_object: any): GithubConfigOut {
     return {};
   },
 
-  _toJsonObject(self: GithubConfigOut): any {
+  _toJsonObject(_self: GithubConfigOut): any {
     return {};
   },
 };

@@ -1,6 +1,8 @@
 // this file is @generated
-/* eslint @typescript-eslint/no-explicit-any: 0 */
-import { EndpointMessageOut, EndpointMessageOutSerializer } from "./endpointMessageOut";
+import {
+  type EndpointMessageOut,
+  EndpointMessageOutSerializer,
+} from "./endpointMessageOut";
 
 export interface ListResponseEndpointMessageOut {
   data: EndpointMessageOut[];

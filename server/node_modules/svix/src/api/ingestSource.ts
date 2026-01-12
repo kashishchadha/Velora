@@ -1,14 +1,17 @@
 // this file is @generated
 
-import { IngestSourceIn, IngestSourceInSerializer } from "../models/ingestSourceIn";
-import { IngestSourceOut, IngestSourceOutSerializer } from "../models/ingestSourceOut";
+import { type IngestSourceIn, IngestSourceInSerializer } from "../models/ingestSourceIn";
 import {
-  ListResponseIngestSourceOut,
+  type IngestSourceOut,
+  IngestSourceOutSerializer,
+} from "../models/ingestSourceOut";
+import {
+  type ListResponseIngestSourceOut,
   ListResponseIngestSourceOutSerializer,
 } from "../models/listResponseIngestSourceOut";
-import { Ordering } from "../models/ordering";
-import { RotateTokenOut, RotateTokenOutSerializer } from "../models/rotateTokenOut";
-import { HttpMethod, SvixRequest, SvixRequestContext } from "../request";
+import type { Ordering } from "../models/ordering";
+import { type RotateTokenOut, RotateTokenOutSerializer } from "../models/rotateTokenOut";
+import { HttpMethod, SvixRequest, type SvixRequestContext } from "../request";
 
 export interface IngestSourceListOptions {
   /** Limit the number of returned items */
@@ -34,9 +37,11 @@ export class IngestSource {
   public list(options?: IngestSourceListOptions): Promise<ListResponseIngestSourceOut> {
     const request = new SvixRequest(HttpMethod.GET, "/ingest/api/v1/source");
 
-    request.setQueryParam("limit", options?.limit);
-    request.setQueryParam("iterator", options?.iterator);
-    request.setQueryParam("order", options?.order);
+    request.setQueryParams({
+      limit: options?.limit,
+      iterator: options?.iterator,
+      order: options?.order,
+    });
 
     return request.send(
       this.requestCtx,

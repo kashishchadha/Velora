@@ -1,16 +1,15 @@
 // this file is @generated
-/* eslint @typescript-eslint/no-explicit-any: 0 */
-/* eslint @typescript-eslint/no-empty-object-type: 0 */
-/* eslint @typescript-eslint/no-unused-vars: 0 */
+
+// biome-ignore-all lint/suspicious/noEmptyInterface: backwards compat
 
 export interface SegmentConfigOut {}
 
 export const SegmentConfigOutSerializer = {
-  _fromJsonObject(object: any): SegmentConfigOut {
+  _fromJsonObject(_object: any): SegmentConfigOut {
     return {};
   },
 
-  _toJsonObject(self: SegmentConfigOut): any {
+  _toJsonObject(_self: SegmentConfigOut): any {
     return {};
   },
 };

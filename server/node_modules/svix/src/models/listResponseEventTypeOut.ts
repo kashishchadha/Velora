@@ -1,6 +1,5 @@
 // this file is @generated
-/* eslint @typescript-eslint/no-explicit-any: 0 */
-import { EventTypeOut, EventTypeOutSerializer } from "./eventTypeOut";
+import { type EventTypeOut, EventTypeOutSerializer } from "./eventTypeOut";
 
 export interface ListResponseEventTypeOut {
   data: EventTypeOut[];

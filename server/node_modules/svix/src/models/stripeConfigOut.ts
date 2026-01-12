@@ -1,16 +1,15 @@
 // this file is @generated
-/* eslint @typescript-eslint/no-explicit-any: 0 */
-/* eslint @typescript-eslint/no-empty-object-type: 0 */
-/* eslint @typescript-eslint/no-unused-vars: 0 */
+
+// biome-ignore-all lint/suspicious/noEmptyInterface: backwards compat
 
 export interface StripeConfigOut {}
 
 export const StripeConfigOutSerializer = {
-  _fromJsonObject(object: any): StripeConfigOut {
+  _fromJsonObject(_object: any): StripeConfigOut {
     return {};
   },
 
-  _toJsonObject(self: StripeConfigOut): any {
+  _toJsonObject(_self: StripeConfigOut): any {
     return {};
   },
 };

@@ -1,10 +1,12 @@
 // this file is @generated
-/* eslint @typescript-eslint/no-explicit-any: 0 */
 import {
-  BackgroundTaskStatus,
+  type BackgroundTaskStatus,
   BackgroundTaskStatusSerializer,
 } from "./backgroundTaskStatus";
-import { BackgroundTaskType, BackgroundTaskTypeSerializer } from "./backgroundTaskType";
+import {
+  type BackgroundTaskType,
+  BackgroundTaskTypeSerializer,
+} from "./backgroundTaskType";
 
 export interface AppUsageStatsOut {
   /** The QueueBackgroundTask's ID. */

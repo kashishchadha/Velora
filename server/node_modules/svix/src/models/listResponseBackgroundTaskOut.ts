@@ -1,6 +1,5 @@
 // this file is @generated
-/* eslint @typescript-eslint/no-explicit-any: 0 */
-import { BackgroundTaskOut, BackgroundTaskOutSerializer } from "./backgroundTaskOut";
+import { type BackgroundTaskOut, BackgroundTaskOutSerializer } from "./backgroundTaskOut";
 
 export interface ListResponseBackgroundTaskOut {
   data: BackgroundTaskOut[];

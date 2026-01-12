@@ -1,39 +1,39 @@
 // this file is @generated
 
 import {
-  ListResponseOperationalWebhookEndpointOut,
+  type ListResponseOperationalWebhookEndpointOut,
   ListResponseOperationalWebhookEndpointOutSerializer,
 } from "../models/listResponseOperationalWebhookEndpointOut";
 import {
-  OperationalWebhookEndpointHeadersIn,
+  type OperationalWebhookEndpointHeadersIn,
   OperationalWebhookEndpointHeadersInSerializer,
 } from "../models/operationalWebhookEndpointHeadersIn";
 import {
-  OperationalWebhookEndpointHeadersOut,
+  type OperationalWebhookEndpointHeadersOut,
   OperationalWebhookEndpointHeadersOutSerializer,
 } from "../models/operationalWebhookEndpointHeadersOut";
 import {
-  OperationalWebhookEndpointIn,
+  type OperationalWebhookEndpointIn,
   OperationalWebhookEndpointInSerializer,
 } from "../models/operationalWebhookEndpointIn";
 import {
-  OperationalWebhookEndpointOut,
+  type OperationalWebhookEndpointOut,
   OperationalWebhookEndpointOutSerializer,
 } from "../models/operationalWebhookEndpointOut";
 import {
-  OperationalWebhookEndpointSecretIn,
+  type OperationalWebhookEndpointSecretIn,
   OperationalWebhookEndpointSecretInSerializer,
 } from "../models/operationalWebhookEndpointSecretIn";
 import {
-  OperationalWebhookEndpointSecretOut,
+  type OperationalWebhookEndpointSecretOut,
   OperationalWebhookEndpointSecretOutSerializer,
 } from "../models/operationalWebhookEndpointSecretOut";
 import {
-  OperationalWebhookEndpointUpdate,
+  type OperationalWebhookEndpointUpdate,
   OperationalWebhookEndpointUpdateSerializer,
 } from "../models/operationalWebhookEndpointUpdate";
-import { Ordering } from "../models/ordering";
-import { HttpMethod, SvixRequest, SvixRequestContext } from "../request";
+import type { Ordering } from "../models/ordering";
+import { HttpMethod, SvixRequest, type SvixRequestContext } from "../request";
 
 export interface OperationalWebhookEndpointListOptions {
   /** Limit the number of returned items */
@@ -64,9 +64,11 @@ export class OperationalWebhookEndpoint {
       "/api/v1/operational-webhook/endpoint"
     );
 
-    request.setQueryParam("limit", options?.limit);
-    request.setQueryParam("iterator", options?.iterator);
-    request.setQueryParam("order", options?.order);
+    request.setQueryParams({
+      limit: options?.limit,
+      iterator: options?.iterator,
+      order: options?.order,
+    });
 
     return request.send(
       this.requestCtx,

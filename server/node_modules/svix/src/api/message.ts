@@ -1,17 +1,17 @@
 // this file is @generated
 
 import {
-  ExpungeAllContentsOut,
+  type ExpungeAllContentsOut,
   ExpungeAllContentsOutSerializer,
 } from "../models/expungeAllContentsOut";
 import {
-  ListResponseMessageOut,
+  type ListResponseMessageOut,
   ListResponseMessageOutSerializer,
 } from "../models/listResponseMessageOut";
-import { MessageOut, MessageOutSerializer } from "../models/messageOut";
+import { type MessageOut, MessageOutSerializer } from "../models/messageOut";
 import { MessagePoller } from "./messagePoller";
-import { HttpMethod, SvixRequest, SvixRequestContext } from "../request";
-import { MessageIn, MessageInSerializer } from "../models/messageIn";
+import { HttpMethod, SvixRequest, type SvixRequestContext } from "../request";
+import { type MessageIn, MessageInSerializer } from "../models/messageIn";
 
 export interface MessageListOptions {
   /** Limit the number of returned items */
@@ -57,8 +57,8 @@ export class Message {
   /**
    * List all of the application's messages.
    *
-   * The `before` and `after` parameters let you filter all items created before or after a certain date. These can be used alongside an iterator to paginate over results
-   * within a certain window.
+   * The `before` and `after` parameters let you filter all items created before or after a certain date. These can be
+   * used alongside an iterator to paginate over results within a certain window.
    *
    * Note that by default this endpoint is limited to retrieving 90 days' worth of data
    * relative to now or, if an iterator is provided, 90 days before/after the time indicated
@@ -72,14 +72,16 @@ export class Message {
     const request = new SvixRequest(HttpMethod.GET, "/api/v1/app/{app_id}/msg");
 
     request.setPathParam("app_id", appId);
-    request.setQueryParam("limit", options?.limit);
-    request.setQueryParam("iterator", options?.iterator);
-    request.setQueryParam("channel", options?.channel);
-    request.setQueryParam("before", options?.before);
-    request.setQueryParam("after", options?.after);
-    request.setQueryParam("with_content", options?.withContent);
-    request.setQueryParam("tag", options?.tag);
-    request.setQueryParam("event_types", options?.eventTypes);
+    request.setQueryParams({
+      limit: options?.limit,
+      iterator: options?.iterator,
+      channel: options?.channel,
+      before: options?.before,
+      after: options?.after,
+      with_content: options?.withContent,
+      tag: options?.tag,
+      event_types: options?.eventTypes,
+    });
 
     return request.send(
       this.requestCtx,
@@ -106,7 +108,9 @@ export class Message {
     const request = new SvixRequest(HttpMethod.POST, "/api/v1/app/{app_id}/msg");
 
     request.setPathParam("app_id", appId);
-    request.setQueryParam("with_content", options?.withContent);
+    request.setQueryParams({
+      with_content: options?.withContent,
+    });
     request.setHeaderParam("idempotency-key", options?.idempotencyKey);
     request.setBody(MessageInSerializer._toJsonObject(messageIn));
 
@@ -117,6 +121,18 @@ export class Message {
    * Delete all message payloads for the application.
    *
    * This operation is only available in the <a href="https://svix.com/pricing" target="_blank">Enterprise</a> plan.
+   *
+   * A completed task will return a payload like the following:
+   * ```json
+   * {
+   *   "id": "qtask_33qen93MNuelBAq1T9G7eHLJRsF",
+   *   "status": "finished",
+   *   "task": "application.purge_content",
+   *   "data": {
+   *     "messagesPurged": 150
+   *   }
+   * }
+   * ```
    */
   public expungeAllContents(
     appId: string,
@@ -143,7 +159,9 @@ export class Message {
 
     request.setPathParam("app_id", appId);
     request.setPathParam("msg_id", msgId);
-    request.setQueryParam("with_content", options?.withContent);
+    request.setQueryParams({
+      with_content: options?.withContent,
+    });
 
     return request.send(this.requestCtx, MessageOutSerializer._fromJsonObject);
   }

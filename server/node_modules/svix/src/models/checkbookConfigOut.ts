@@ -1,16 +1,15 @@
 // this file is @generated
-/* eslint @typescript-eslint/no-explicit-any: 0 */
-/* eslint @typescript-eslint/no-empty-object-type: 0 */
-/* eslint @typescript-eslint/no-unused-vars: 0 */
+
+// biome-ignore-all lint/suspicious/noEmptyInterface: backwards compat
 
 export interface CheckbookConfigOut {}
 
 export const CheckbookConfigOutSerializer = {
-  _fromJsonObject(object: any): CheckbookConfigOut {
+  _fromJsonObject(_object: any): CheckbookConfigOut {
     return {};
   },
 
-  _toJsonObject(self: CheckbookConfigOut): any {
+  _toJsonObject(_self: CheckbookConfigOut): any {
     return {};
   },
 };

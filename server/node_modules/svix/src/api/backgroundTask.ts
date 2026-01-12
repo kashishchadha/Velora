@@ -1,17 +1,17 @@
 // this file is @generated
 
 import {
-  BackgroundTaskOut,
+  type BackgroundTaskOut,
   BackgroundTaskOutSerializer,
 } from "../models/backgroundTaskOut";
-import { BackgroundTaskStatus } from "../models/backgroundTaskStatus";
-import { BackgroundTaskType } from "../models/backgroundTaskType";
+import type { BackgroundTaskStatus } from "../models/backgroundTaskStatus";
+import type { BackgroundTaskType } from "../models/backgroundTaskType";
 import {
-  ListResponseBackgroundTaskOut,
+  type ListResponseBackgroundTaskOut,
   ListResponseBackgroundTaskOutSerializer,
 } from "../models/listResponseBackgroundTaskOut";
-import { Ordering } from "../models/ordering";
-import { HttpMethod, SvixRequest, SvixRequestContext } from "../request";
+import type { Ordering } from "../models/ordering";
+import { HttpMethod, SvixRequest, type SvixRequestContext } from "../request";
 
 export interface BackgroundTaskListOptions {
   /** Filter the response based on the status. */
@@ -35,11 +35,13 @@ export class BackgroundTask {
   ): Promise<ListResponseBackgroundTaskOut> {
     const request = new SvixRequest(HttpMethod.GET, "/api/v1/background-task");
 
-    request.setQueryParam("status", options?.status);
-    request.setQueryParam("task", options?.task);
-    request.setQueryParam("limit", options?.limit);
-    request.setQueryParam("iterator", options?.iterator);
-    request.setQueryParam("order", options?.order);
+    request.setQueryParams({
+      status: options?.status,
+      task: options?.task,
+      limit: options?.limit,
+      iterator: options?.iterator,
+      order: options?.order,
+    });
 
     return request.send(
       this.requestCtx,

@@ -1,6 +1,5 @@
 // this file is @generated
-/* eslint @typescript-eslint/no-explicit-any: 0 */
-import { MessageAttemptOut, MessageAttemptOutSerializer } from "./messageAttemptOut";
+import { type MessageAttemptOut, MessageAttemptOutSerializer } from "./messageAttemptOut";
 
 export interface ListResponseMessageAttemptOut {
   data: MessageAttemptOut[];

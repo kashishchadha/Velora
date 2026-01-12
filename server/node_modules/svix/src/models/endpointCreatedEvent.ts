@@ -1,7 +1,6 @@
 // this file is @generated
-/* eslint @typescript-eslint/no-explicit-any: 0 */
 import {
-  EndpointCreatedEventData,
+  type EndpointCreatedEventData,
   EndpointCreatedEventDataSerializer,
 } from "./endpointCreatedEventData";
 

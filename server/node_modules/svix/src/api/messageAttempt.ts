@@ -1,24 +1,25 @@
 // this file is @generated
 
+import { type EmptyResponse, EmptyResponseSerializer } from "../models/emptyResponse";
 import {
-  ListResponseEndpointMessageOut,
+  type ListResponseEndpointMessageOut,
   ListResponseEndpointMessageOutSerializer,
 } from "../models/listResponseEndpointMessageOut";
 import {
-  ListResponseMessageAttemptOut,
+  type ListResponseMessageAttemptOut,
   ListResponseMessageAttemptOutSerializer,
 } from "../models/listResponseMessageAttemptOut";
 import {
-  ListResponseMessageEndpointOut,
+  type ListResponseMessageEndpointOut,
   ListResponseMessageEndpointOutSerializer,
 } from "../models/listResponseMessageEndpointOut";
 import {
-  MessageAttemptOut,
+  type MessageAttemptOut,
   MessageAttemptOutSerializer,
 } from "../models/messageAttemptOut";
-import { MessageStatus } from "../models/messageStatus";
-import { StatusCodeClass } from "../models/statusCodeClass";
-import { HttpMethod, SvixRequest, SvixRequestContext } from "../request";
+import type { MessageStatus } from "../models/messageStatus";
+import type { StatusCodeClass } from "../models/statusCodeClass";
+import { HttpMethod, SvixRequest, type SvixRequestContext } from "../request";
 
 export interface MessageAttemptListByEndpointOptions {
   /** Limit the number of returned items */
@@ -125,17 +126,19 @@ export class MessageAttempt {
 
     request.setPathParam("app_id", appId);
     request.setPathParam("endpoint_id", endpointId);
-    request.setQueryParam("limit", options?.limit);
-    request.setQueryParam("iterator", options?.iterator);
-    request.setQueryParam("status", options?.status);
-    request.setQueryParam("status_code_class", options?.statusCodeClass);
-    request.setQueryParam("channel", options?.channel);
-    request.setQueryParam("tag", options?.tag);
-    request.setQueryParam("before", options?.before);
-    request.setQueryParam("after", options?.after);
-    request.setQueryParam("with_content", options?.withContent);
-    request.setQueryParam("with_msg", options?.withMsg);
-    request.setQueryParam("event_types", options?.eventTypes);
+    request.setQueryParams({
+      limit: options?.limit,
+      iterator: options?.iterator,
+      status: options?.status,
+      status_code_class: options?.statusCodeClass,
+      channel: options?.channel,
+      tag: options?.tag,
+      before: options?.before,
+      after: options?.after,
+      with_content: options?.withContent,
+      with_msg: options?.withMsg,
+      event_types: options?.eventTypes,
+    });
 
     return request.send(
       this.requestCtx,
@@ -163,17 +166,19 @@ export class MessageAttempt {
 
     request.setPathParam("app_id", appId);
     request.setPathParam("msg_id", msgId);
-    request.setQueryParam("limit", options?.limit);
-    request.setQueryParam("iterator", options?.iterator);
-    request.setQueryParam("status", options?.status);
-    request.setQueryParam("status_code_class", options?.statusCodeClass);
-    request.setQueryParam("channel", options?.channel);
-    request.setQueryParam("tag", options?.tag);
-    request.setQueryParam("endpoint_id", options?.endpointId);
-    request.setQueryParam("before", options?.before);
-    request.setQueryParam("after", options?.after);
-    request.setQueryParam("with_content", options?.withContent);
-    request.setQueryParam("event_types", options?.eventTypes);
+    request.setQueryParams({
+      limit: options?.limit,
+      iterator: options?.iterator,
+      status: options?.status,
+      status_code_class: options?.statusCodeClass,
+      channel: options?.channel,
+      tag: options?.tag,
+      endpoint_id: options?.endpointId,
+      before: options?.before,
+      after: options?.after,
+      with_content: options?.withContent,
+      event_types: options?.eventTypes,
+    });
 
     return request.send(
       this.requestCtx,
@@ -203,15 +208,17 @@ export class MessageAttempt {
 
     request.setPathParam("app_id", appId);
     request.setPathParam("endpoint_id", endpointId);
-    request.setQueryParam("limit", options?.limit);
-    request.setQueryParam("iterator", options?.iterator);
-    request.setQueryParam("channel", options?.channel);
-    request.setQueryParam("tag", options?.tag);
-    request.setQueryParam("status", options?.status);
-    request.setQueryParam("before", options?.before);
-    request.setQueryParam("after", options?.after);
-    request.setQueryParam("with_content", options?.withContent);
-    request.setQueryParam("event_types", options?.eventTypes);
+    request.setQueryParams({
+      limit: options?.limit,
+      iterator: options?.iterator,
+      channel: options?.channel,
+      tag: options?.tag,
+      status: options?.status,
+      before: options?.before,
+      after: options?.after,
+      with_content: options?.withContent,
+      event_types: options?.eventTypes,
+    });
 
     return request.send(
       this.requestCtx,
@@ -274,8 +281,10 @@ export class MessageAttempt {
 
     request.setPathParam("app_id", appId);
     request.setPathParam("msg_id", msgId);
-    request.setQueryParam("limit", options?.limit);
-    request.setQueryParam("iterator", options?.iterator);
+    request.setQueryParams({
+      limit: options?.limit,
+      iterator: options?.iterator,
+    });
 
     return request.send(
       this.requestCtx,
@@ -289,7 +298,7 @@ export class MessageAttempt {
     msgId: string,
     endpointId: string,
     options?: MessageAttemptResendOptions
-  ): Promise<void> {
+  ): Promise<EmptyResponse> {
     const request = new SvixRequest(
       HttpMethod.POST,
       "/api/v1/app/{app_id}/msg/{msg_id}/endpoint/{endpoint_id}/resend"
@@ -300,6 +309,6 @@ export class MessageAttempt {
     request.setPathParam("endpoint_id", endpointId);
     request.setHeaderParam("idempotency-key", options?.idempotencyKey);
 
-    return request.sendNoResponseBody(this.requestCtx);
+    return request.send(this.requestCtx, EmptyResponseSerializer._fromJsonObject);
   }
 }
