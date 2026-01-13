@@ -9,6 +9,13 @@ import cors from 'cors'
 const app=express()
 app.use(cors(process.env.CLIENT_URL))
 app.use(clerkMiddleware())
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", 
+    "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 app.use("/webhooks",webhookRoter)
 
 app.use(express.json())

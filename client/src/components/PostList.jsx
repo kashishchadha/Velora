@@ -1,6 +1,6 @@
 import React from 'react'
 import PostListItem from './PostListItem'
-import useQuery from '@tanstack/react-query'
+import {useQuery} from '@tanstack/react-query'
 import axios from 'axios'
 const fetchPosts=async()=>{
   const res= await axios.get(`${import.meta.env.VITE_API_URL}/posts`)
