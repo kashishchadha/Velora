@@ -19,14 +19,18 @@ export const getPost=async(req,res)=>{
     res.status(200).json(post)
 }
 
-export const create=async (req,res)=>{
-         const clerkUserId=req.auth.userId;
+export const create=async (req,res,next)=>{
+    try {
+         console.log("Create post called");
+         const {userId: clerkUserId}=await req.auth();
+         console.log("Clerk User ID:", clerkUserId);
          if(!clerkUserId){
             return res.status(401).json("not authenticated")
          }
-         const user=await User.findOne({clerkUserId});
+         const user=await User.findOne({clerkId: clerkUserId});
+         console.log("User found:", user);
          if(!user){
-            return res.status(404).json("message not found")
+            return res.status(404).json("User not found. Please make sure your account is synced.")
          }
          let slug=req.body.title.replace(/ /g,"-").toLowerCase();
          let existingPost=await Post.findOne({slug});
@@ -38,14 +42,19 @@ export const create=async (req,res)=>{
          }
   const newPost=new Post({user:user._id,slug,...req.body});
   const post =await newPost.save();
+  console.log("Post created successfully");
   res.status(200).json("post created");
+    } catch (error) {
+        console.error("Error creating post:", error);
+        next(error);
+    }
 }
 export const deletePost=async(req,res)=>{
-     const clerkUserId=req.auth.userId;
+     const {userId: clerkUserId}=await req.auth();
          if(!clerkUserId){
             return res.status(401).json("not authenticated")
          }
-         const user=await User.findOne({clerkUserId});
+         const user=await User.findOne({clerkId: clerkUserId});
      
     const deletdpost=await Post.findByIdAndDelete({_id:req.params.id,user:user._id});
     if(!deletdpost){
