@@ -4,7 +4,7 @@ import User from "../models/user.model.js";
 export const getPosts=async(req,res)=>{
      const page=parseInt(req.query.page) || 1;
      const limit=parseInt(req.query.limit) || 5
-    const posts=await Post.find().limit(limit).skip((page-1)*limit);
+    const posts=await Post.find().limit(limit).skip((page-1)*limit).populate("user","username");
     const totalPosts=await Post.countDocuments();
     const hasMore=page*limit<totalPosts;
 

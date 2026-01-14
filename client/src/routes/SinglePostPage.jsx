@@ -1,9 +1,28 @@
 import React from 'react'
 import Image from '../components/image'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import Comments from '../components/Comments'
 import PostMenueActions from '../components/PostMenueActions'
+import { useQuery } from '@tanstack/react-query'
+import axios from  'axios'
+
+const fetchPost= async (slug)=>{
+  const res=await axios.get(`${import.meta.env.VITE_API_URL}/posts/${slug}`);
+  return res.data;
+}
 function SinglePostPage() {
+    const {slug}=useParams();
+const {isPending,error,data}=useQuery({
+
+  queryKey:["post",slug],
+  queryFn:()=>fetchPost(slug),
+})
+
+if(isPending) return "Loading"
+if(error) return "somthing went wrong"+error.message
+if(!data) return "post not found"
+
+
   return (
     <div className='flex flex-col gap-8'>
 <div className="flex gap-8">
