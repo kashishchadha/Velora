@@ -5,6 +5,7 @@ import Comments from '../components/Comments'
 import PostMenueActions from '../components/PostMenueActions'
 import { useQuery } from '@tanstack/react-query'
 import axios from  'axios'
+import { format } from 'timeago.js'
 
 const fetchPost= async (slug)=>{
   const res=await axios.get(`${import.meta.env.VITE_API_URL}/posts/${slug}`);
@@ -27,21 +28,21 @@ if(!data) return "post not found"
     <div className='flex flex-col gap-8'>
 <div className="flex gap-8">
   <div className="lg:w-3/5 flex flex-col gap-8">
-  <h1 className='text-xl md:text-3xl xl:text-4xl 2xl:text-5xl font-semibold'>Lorem ipsum dolor sit amet consectetur adipis icing elit. Doloremque illo praesentium reiciendis deleniti quaerat aut </h1>
+  <h1 className='text-xl md:text-3xl xl:text-4xl 2xl:text-5xl font-semibold'>{data.title} </h1>
   <div className="flex items-center gap-2 text-gray-400 text-sm">
     <span>Written by</span>
-    <Link className='text-blue-800'>John Doe</Link>
+    <Link className='text-blue-800'>{data.user.username}</Link>
     <span>on</span>
-    <Link className='text-blue-800'>Web Design</Link>
-    <span>2 days ago</span>
+    <Link className='text-blue-800'>{data.category}</Link>
+    <span>{format(data.createdAt)}</span>
 
   </div>
-  <p className='text-gray-500 font-medium'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Exercitationem totam aperiam, architecto voluptatem adipisci error nemo doloremque mollitia voluptatum ab, excepturi enim magni placeat, temporibus quia quos? Illum, nihil ratione.</p>
+  <p className='text-gray-500 font-medium'>{data.desc}</p>
 </div>
-  
+  {data.img &&
   <div className="hidden lg:block w-2/5">
-  <Image src="plaintype/postImg.jpeg"/>
-  </div>
+  <Image src={data.img}/>
+  </div>}
 </div>
 
 
@@ -67,8 +68,9 @@ if(!data) return "post not found"
     <h1 className=' mb-4 text-sm font-medium ' >Author</h1>
     <div className=" flex flex-col gap-4">
     <div className=" flex items-center gap-8 ">
-      <Image src='plaintype/userImg.jpeg' className='w-12 h-12 rounded-full object-cover' w='48' h='48'/>
-      <Link className='text-blue-800'>John Doe</Link>
+      {data.user.img && 
+      <Image src={data.user.img} className='w-12 h-12 rounded-full object-cover' w='48' h='48'/>}
+      <Link className='text-blue-800'>{data.user.username}</Link>
         </div>
       <p className='text-sm text-gray-500 '>Lorem ipsum dolor sit ametitgn vnninl</p>
       <div className="flex gap-2">
