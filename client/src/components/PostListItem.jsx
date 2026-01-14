@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 function PostListItem() {
   return (
-    <div className='flex flex-col xl:flex-row gap-8' >
+    <div className='flex flex-col xl:flex-row gap-8 mb-12' >
         <div className="md:hidden xl:block xl:w-1/3">
         <Image src='plaintype/postImg.jpeg' className='rounded-2xl object-cover' w="735"></Image>
         </div>
