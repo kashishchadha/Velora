@@ -11,7 +11,7 @@ const postId=req.params.postId
 if(!clerkId){
     return res.status(401).json("Not authenticated")
 }
-const user=User.findOne({clerkId})
+const user= await User.findOne({clerkId})
 const newComment=new Comment({
     ...req.body,
     user:user._id,
