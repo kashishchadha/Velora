@@ -3,6 +3,7 @@ import Comment from './Comment'
 import axios from 'axios';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
+import { useAuth } from '@clerk/clerk-react';
 
 const fetchComment= async (postId)=>{
   const res=await axios.get(`${import.meta.env.VITE_API_URL}/comments/${postId}`);
@@ -54,8 +55,8 @@ mutation.mutate(data)
     <button className='bg-blue-800 px-4 py-3 text-white font-medium rounded-xl'>Send</button>
 </form>
 
-{data.map((Comment)=>(
-<Comment key={Comment._id} Comment={Comment}/>
+{data.map((comment)=>(
+<Comment key={comment._id} comment={comment}/>
 ))}
 
 
