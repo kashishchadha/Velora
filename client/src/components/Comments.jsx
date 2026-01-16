@@ -30,12 +30,7 @@ if(!data) return "comment not found"
 <Comment key={Comment._id} Comment={Comment}/>
 ))}
 
-<Comment/>
-<Comment/>
-<Comment/>
-<Comment/>
-<Comment/>
-<Comment/>
+
     </div>
   )
 }
