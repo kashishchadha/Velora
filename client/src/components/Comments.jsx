@@ -16,7 +16,7 @@ function Comments() {
 
 if(isPending) return "Loading"
 if(error) return "something went wrong"+error.message
-if(!data) return "comment not found"
+
 
   return (
     <div className='flex flex-col gap-8 lg:w-3/5'>

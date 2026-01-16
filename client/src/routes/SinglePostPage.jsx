@@ -101,7 +101,7 @@ if(!data) return "post not found"
   </div>
 </div>
 
-<Comments/>
+<Comments postId={data._id}/>
 </div>
   )
 }
