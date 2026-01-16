@@ -3,13 +3,14 @@ import Comment from './Comment'
 import axios from 'axios';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { toast } from 'react-toastify';
-import { useAuth } from '@clerk/clerk-react';
+import { useAuth, useUser } from "@clerk/clerk-react";
 
 const fetchComment= async (postId)=>{
   const res=await axios.get(`${import.meta.env.VITE_API_URL}/comments/${postId}`);
   return res.data;
 }
 function Comments({postId}) {
+   const { user } = useUser();
   const {getToken}=useAuth()
   const {isPending,error,data}=useQuery({
 
@@ -54,11 +55,29 @@ mutation.mutate(data)
     <textarea placeholder="Write a comment.." name="desc" className="w-full p-4 bg-white rounded-xl"/>
     <button className='bg-blue-800 px-4 py-3 text-white font-medium rounded-xl'>Send</button>
 </form>
-
+    {isPending ? (
+        "Loading..."
+      ) : error ? (
+        "Error loading comments!"
+      ) : (
+        <>
+          {mutation.isPending && (
+            <Comment
+              comment={{
+                desc: `${mutation.variables.desc} (Sending...)`,
+                createdAt: new Date(),
+                user: {
+                  img: user.imageUrl,
+                  username: user.username,
+                },
+              }}
+            />
+          )}
 {data.map((comment)=>(
-<Comment key={comment._id} comment={comment}/>
+<Comment key={comment._id} comment={comment} postId={postId}/>
 ))}
-
+</>
+      )}
 
     </div>
   )
