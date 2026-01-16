@@ -27,8 +27,8 @@ if(!clerkId){
     return res.status(401).json("Not authenticated")
 }
 const user=User.findOne({clerkId})
-const deletedComment=await Comment.findOneAndDelete({_id:id,user:user._id})
-if(!deleteComment){
+const deletedComment=await Comment.findOneAndDelete({_id:req.params.id,user:user._id})
+if(!deletedComment){
     return res.status(403).json("you can delete only your comment")
 }
 res.status(200).json("comment Deleted")
