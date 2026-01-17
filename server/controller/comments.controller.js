@@ -17,7 +17,10 @@ const newComment=new Comment({
     user:user._id,
     post:postId,
 })
-const savedComment=await newComment.save()
+setTimeout(()=>{
+const savedComment=  newComment.save()
+},3000)
+
 res.status(201).json(savedComment)
 }
 export const deleteComment=async(req,res)=>{

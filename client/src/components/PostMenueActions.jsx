@@ -1,6 +1,9 @@
+import { useAuth, useUser } from '@clerk/clerk-react'
 import React from 'react'
 
-function PostMenueActions() {
+function PostMenueActions({post}) {
+  const {user} =useUser()
+  const {getToken}=useAuth()
   return (
     <div>
  <h1 className="mt-8 mb-4 text-sm font-medium">Actions</h1>
@@ -21,7 +24,7 @@ function PostMenueActions() {
           <span>Save this Post</span>
  </div>
 
-  <div
+  {user && post.user.username===user.username && <div
           className="flex items-center gap-2 py-2 text-sm cursor-pointer"
         >
           <svg
@@ -36,7 +39,7 @@ function PostMenueActions() {
           <span>Delete this Post</span>
 
           </div>
-
+}
         
     </div>
   )
