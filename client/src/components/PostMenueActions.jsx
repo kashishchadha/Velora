@@ -1,5 +1,5 @@
 import { useAuth, useUser } from '@clerk/clerk-react'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import React from 'react'
 import axios from 'axios'
 import { toast } from 'react-toastify'
@@ -39,13 +39,38 @@ const navigate=useNavigate()
       toast.error(error.response.data)
     }
   })
+  const queryClient=useQueryClient()
+   const saveMutation=useMutation({
+    mutationFn:async ()=>{
+      const token=await getToken();
+      return axios.patch (`${import.meta.env.VITE_API_URL}/users/save`, {
+        postId:post._id,
+      }, {
+        headers:{
+          Authorization:`Bearer ${token}`,
+        }
+      })
+    },
+    onSuccess:()=>{
+     queryClient.invalidateQueries({queryKey:["savedPosts"]});
+    },
+    onError:(error)=>{
+      toast.error(error.response.data)
+    }
+  })
   const handleDelete=()=>{
     deleteMutation.mutate()
+  }
+   const handlesave=()=>{
+    if(!user){
+      return navigate("/login")
+    }
+    saveMutation.mutate()
   }
   return (
     <div>
  <h1 className="mt-8 mb-4 text-sm font-medium">Actions</h1>
- {isPending? "Loading...":error?("saved post fetching failed"):(<div className="flex items-center gap-2 text-sm cursor-pointer">
+ {isPending? "Loading...":error?("saved post fetching failed"):(<div className="flex items-center gap-2 text-sm cursor-pointer" onClick={handlesave}>
 
      <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -57,10 +82,12 @@ const navigate=useNavigate()
               d="M12 4C10.3 4 9 5.3 9 7v34l15-9 15 9V7c0-1.7-1.3-3-3-3H12z"
               stroke="black"
               strokeWidth="2"
-              fill={isSaved?"black":"none"}
+              fill={saveMutation.isPending?isSaved?"none":"black":isSaved?"black":"none"}
             />
           </svg>
           <span>Save this Post</span>
+{saveMutation.isPending && <span className='text-xs'>(in progress)</span>}
+
  </div>)}
 
   {user && post.user.username===user.username && <div onClick={handleDelete}

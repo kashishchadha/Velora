@@ -22,5 +22,8 @@ if(!isSaved){
         $pull:{savedPosts:postId},
     });
 }
+setTimeout(()=>{
 res.status(200).json(isSaved?"Post unsaved":"post saved")
+
+},3000)
 }
