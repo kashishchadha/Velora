@@ -21,6 +21,7 @@ const navigate=useNavigate()
       })
     }
   })
+  const isAdmin=user?.publicMetadata?.role==="admin"||false
   const isSaved=data?.data?.some((p)=>p===post._id)|| false;
   const deleteMutation=useMutation({
     mutationFn:async ()=>{
@@ -90,7 +91,7 @@ const navigate=useNavigate()
 
  </div>)}
 
-  {user && post.user.username===user.username && <div onClick={handleDelete}
+  {user && (post.user.username===user.username || isAdmin) && <div onClick={handleDelete}
           className="flex items-center gap-2 py-2 text-sm cursor-pointer"
         >
           <svg
