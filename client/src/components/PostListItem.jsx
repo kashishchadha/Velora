@@ -17,7 +17,7 @@ function PostListItem({post}) {
 
             <div className="flex items-center gap-2 text-gray-400 text-sm">
                 <span>Written by</span>
-                <Link className='text-blue-800'>{post.user?.username || 'Unknown'}</Link>
+                <Link className='text-blue-800'to={`/posts?author=${post.user.username}`} >{post.user?.username || 'Unknown'}</Link>
                 <span>On</span>
                 <Link className='text-blue-800'>{post.category}</Link>
                 <span>{format(post.createdAt)}</span>

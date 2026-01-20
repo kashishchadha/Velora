@@ -53,6 +53,9 @@ export const getPosts=async(req,res)=>{
     }
   }
 
+  if(featured){
+    query.isFeatured=true
+  }
     const posts=await Post.find(query).limit(limit).skip((page-1)*limit).populate("user","username").sort(sortObj);
     const totalPosts=await Post.countDocuments();
     const hasMore=page*limit<totalPosts;

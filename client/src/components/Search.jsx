@@ -1,8 +1,22 @@
 import React from 'react'
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom'
 
 function Search() {
+  const location =useLocation();
+  const navigate=useNavigate();
+  const [searchParams,setSearchParams]=useSearchParams();
+  const handleKeyPress=(e)=>{
+    if(e.key==="Enter"){
+      const query=e.target.value;
+      if(location.pathname==="/posts"){
+        setSearchParams({...Object.fromEnteries(searchParams),search:query});
+      }else{
+        navigate(`/posts?search=${query}`);
+      }
+    }
+  }
   return (
-   <div className="bg-gray-100 p-2 rounded-full flex items-center gap-2">
+   <div className="bg-gray-100 p-2 rounded-full flex items-center gap-2" onKeyDown={handleKeyPress}>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
