@@ -9,14 +9,15 @@ function Search() {
     if(e.key==="Enter"){
       const query=e.target.value;
       if(location.pathname==="/posts"){
-        setSearchParams({...Object.fromEnteries(searchParams),search:query});
+        
+        setSearchParams({...Object.fromEntries(searchParams),search:query});
       }else{
         navigate(`/posts?search=${query}`);
       }
     }
   }
   return (
-   <div className="bg-gray-100 p-2 rounded-full flex items-center gap-2" onKeyDown={handleKeyPress}>
+   <div className="bg-gray-100 p-2 rounded-full flex items-center gap-2" >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
@@ -32,7 +33,8 @@ function Search() {
       <input
         type="text"
         placeholder="search a post..."
-        className="bg-transparent"
+        className="bg-transparent outline-0"
+        onKeyDown={handleKeyPress}
       />
       </div>
   )

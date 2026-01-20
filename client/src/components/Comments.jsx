@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Comment from './Comment'
 import axios from 'axios';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -12,8 +12,8 @@ const fetchComment= async (postId)=>{
 function Comments({postId}) {
    const { user } = useUser();
   const {getToken}=useAuth()
+  const formRef=useRef(null);
   const {isPending,error,data}=useQuery({
-
   queryKey:["comments",postId],
   queryFn:()=>fetchComment(postId),
 })
@@ -30,6 +30,7 @@ const queryClient=useQueryClient()
     },
     onSuccess:()=>{
      queryClient.invalidateQueries({queryKey:["comments",postId]})
+     formRef.current.reset();
     },
     onError:(error)=>{
       toast.error(error.response.data);
@@ -51,7 +52,7 @@ mutation.mutate(data)
   return (
     <div className='flex flex-col gap-8 lg:w-3/5 mb-12'>
 <h1 className='text-xl text-gray-500 underline'>Comments</h1>
-<form onSubmit={handleSubmit} className='flex items-center justify-between gap-8 w-full'>
+<form ref={formRef} onSubmit={handleSubmit} className='flex items-center justify-between gap-8 w-full'>
     <textarea placeholder="Write a comment.." name="desc" className="w-full p-4 bg-white rounded-xl"/>
     <button className='bg-blue-800 px-4 py-3 text-white font-medium rounded-xl'>Send</button>
 </form>

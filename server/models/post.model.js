@@ -43,5 +43,5 @@ visit:{
     type:Number,
     default:0,
 },
-},{timeseries:true})
+},{timestamps:true})
 export default mongoose.model("Post",postSchema)

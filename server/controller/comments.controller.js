@@ -6,7 +6,7 @@ res.json(comments)
 }
 
 export const addComment=async (req,res)=>{
-const clerkId=req.auth.userId
+const {userId: clerkId}=await req.auth()
 const postId=req.params.postId
 if(!clerkId){
     return res.status(401).json("Not authenticated")
@@ -17,24 +17,23 @@ const newComment=new Comment({
     user:user._id,
     post:postId,
 })
-setTimeout(()=>{
-const savedComment=  newComment.save()
-},3000)
+const savedComment = await newComment.save()
+const populatedComment = await savedComment.populate("user", "username img")
 
-res.status(201).json(savedComment)
+res.status(201).json(populatedComment)
 }
 export const deleteComment=async(req,res)=>{
-const clerkId=req.auth.userId
+const {userId: clerkId, sessionClaims}=await req.auth()
 const postId=req.params.postId
 if(!clerkId){
     return res.status(401).json("Not authenticated")
 }
-const role=req.auth.sessionClaims?.metadata?.role||"user";
+const role=sessionClaims?.publicMetadata?.role || sessionClaims?.metadata?.role||"user";
   if(role==="admin"){
             await Comment.findByIdAndDelete(req.params.id);
           return   res.status(200).json("comment has been deleted");
          }
-const user=User.findOne({clerkId})
+const user=await User.findOne({clerkId:clerkId})
 const deletedComment=await Comment.findOneAndDelete({_id:req.params.id,user:user._id})
 if(!deletedComment){
     return res.status(403).json("you can delete only your comment")

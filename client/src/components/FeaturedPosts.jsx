@@ -2,6 +2,8 @@ import React from 'react'
 import Image from './image'
 import { Link } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query';
+import axios from "axios"
+import { format } from 'timeago.js'
 const fetchPost = async () => {
   const res = await axios.get(
     `${import.meta.env.VITE_API_URL}/posts?featured=true&limit=4&sort=newest`
@@ -14,16 +16,22 @@ function FeaturedPosts() {
     queryFn: () => fetchPost(),
   });
 
-  if (isPending) return "loading...";
-  if (error) return "Something went wrong!" + error.message;
+ 
+
+  if (isPending) return <div>Loading featured posts...</div>;
+  if (error) return <div>Something went wrong! {error.message}</div>;
 
   const posts = data.posts;
+  console.log("FeaturedPosts - posts:", posts);
+  
   if (!posts || posts.length === 0) {
-    return;
+    console.log("No featured posts found");
+    return <div className="mt-8 p-4 bg-gray-100 rounded-lg text-center text-gray-500">No featured posts available</div>;
   }
   return (
  <div className="mt-8 flex flex-col lg:flex-row gap-8">
       {/* First */}
+      
       <div className="w-full lg:w-1/2 flex flex-col gap-4">
         {/* image */}
         {posts[0].img && <Image
@@ -35,7 +43,7 @@ function FeaturedPosts() {
         <div className="flex items-center gap-4">
           <h1 className="font-semibold lg:text-lg">01.</h1>
           <Link className="text-blue-800 lg:text-lg">{posts[0].category}</Link>
-          <span className="text-gray-500">{format(posts[0].createdAt)}</span>
+          <span className="text-gray-500">{format(new Date(posts[0].createdAt))}</span>
         </div>
         {/* title */}
         <Link
@@ -62,7 +70,7 @@ function FeaturedPosts() {
             <div className="flex items-center gap-4 text-sm lg:text-base mb-4">
               <h1 className="font-semibold">02.</h1>
               <Link className="text-blue-800">{posts[1].category}</Link>
-              <span className="text-gray-500 text-sm">{format(posts[1].createdAt)}</span>
+              <span className="text-gray-500 text-sm">{format(new Date(posts[1].createdAt))}</span>
             </div>
             {/* title */}
             <Link
@@ -88,7 +96,7 @@ function FeaturedPosts() {
             <div className="flex items-center gap-4 text-sm lg:text-base mb-4">
               <h1 className="font-semibold">02.</h1>
               <Link className="text-blue-800">{posts[2].category}</Link>
-              <span className="text-gray-500 text-sm">{format(posts[2].createdAt)}</span>
+              <span className="text-gray-500 text-sm">{format(new Date(posts[2].createdAt))}</span>
             </div>
             {/* title */}
             <Link
@@ -114,7 +122,7 @@ function FeaturedPosts() {
             <div className="flex items-center gap-4 text-sm lg:text-base mb-4">
               <h1 className="font-semibold">02.</h1>
               <Link className="text-blue-800">{posts[3].category}</Link>
-              <span className="text-gray-500 text-sm">{format(posts[3].createdAt)}</span>
+              <span className="text-gray-500 text-sm">{format(new Date(posts[3].createdAt))}</span>
             </div>
             {/* title */}
             <Link

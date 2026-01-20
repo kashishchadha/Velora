@@ -44,6 +44,7 @@ function Write() {
       });
     },
     onSuccess:(res)=>{
+      console.log(res.data);
       toast.success("post has been created")
 navigate(`/${res.data.slug}`)
     }

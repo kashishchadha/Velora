@@ -10,6 +10,12 @@ const app=express()
 app.use(cors(process.env.CLIENT_URL))
 app.use(clerkMiddleware())
 
+// Log all requests
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path}`);
+  next();
+});
+
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", 
@@ -24,6 +30,13 @@ app.use(express.json())
 app.use("/users",UserRouter)
 app.use("/posts",PostRouter)
 app.use("/comments",CommentRouter)
+
+// 404 handler - log what routes were registered
+app.use((req, res, next) => {
+  console.log("404 - Route not found:", req.method, req.path);
+  console.log("Available routes registered");
+  res.status(404).json({ error: "Route not found", path: req.path, method: req.method });
+});
 
 //error handler
 app.use((error,req,res,next)=>{
