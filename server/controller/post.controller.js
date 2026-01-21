@@ -11,6 +11,9 @@ export const getPosts=async(req,res)=>{
   const searchQuery = req.query.search;
   const sortQuery = req.query.sort;
   const featured = req.query.featured;
+  
+  console.log("All query params:", req.query);
+  console.log("Sort query:", sortQuery);
 
   if (cat) {
     query.category = cat;
@@ -58,12 +61,11 @@ export const getPosts=async(req,res)=>{
     query.isFeatured=true
   }
   
-  console.log("Query:", query);
-  console.log("Featured param:", featured);
-  
     const posts=await Post.find(query).limit(limit).skip((page-1)*limit).populate("user","username").sort(sortObj);
     
     console.log("Found posts:", posts.length);
+    if(sortQuery === 'popular'){
+    }
     if(featured){
       console.log("Featured posts isFeatured values:", posts.map(p => ({id: p._id, isFeatured: p.isFeatured})));
     }

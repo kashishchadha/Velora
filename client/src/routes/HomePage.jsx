@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import MainCategories from '../components/MainCategories'
 import FeaturedPosts from '../components/FeaturedPosts'
 import PostList from '../components/PostList'
-
+import SideMenu from '../components/SideMenu'
 function HomePage() {
   return (
     <div className='mt-4 flex flex-col gap-4'>
@@ -16,8 +16,8 @@ function HomePage() {
 
       <div className=" flex items-center justify-between">
 <div className="l">
-  <h1 className='text-gray-800 text-2xl ms:text-5xl lg:text-6xl font-bold'>Lorem ipsum dolor sit amet consectetur adipisicing elit. </h1>
-  <p className='mt-8 text-md md:text-xl'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quia explicabo id, dolor eum repudiandae illum laudantium, ratione quae excepturi dolores atque repellendus! </p>
+  <h1 className='text-gray-800 text-2xl ms:text-5xl lg:text-6xl font-bold'>Where Words and Code Stay Simple. </h1>
+  <p className='mt-8 text-md md:text-xl'>Velora is a space where clarity leads — blending thoughtful writing, clean design, and modern development into simple, powerful content for creators, coders, and curious minds. </p>
 </div>
 
  <Link to="write" className="hidden md:block relative">
@@ -64,7 +64,14 @@ function HomePage() {
 
 <div className="">
 <h1 className='my-8 text-2xl text-gray-600'>Recent Posts</h1>
-<PostList/>
+ <div className="flex flex-col-reverse gap-8 md:flex-row justify-between">
+        <div className="">
+          <PostList />
+        </div>
+        <div className={`${open ? "block" : "hidden"} md:block`}>
+          <SideMenu />
+        </div>
+      </div>
 </div>
 
     </div>

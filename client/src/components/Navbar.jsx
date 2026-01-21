@@ -19,7 +19,7 @@ const Navbar=()=>{
     <div className={`w-full h-screen  flex flex-col items-center justify-center font-medium gap-8 text-lg absolute top-16   transition-all ease-in-out ${open?"-right-0":"-right-(100%)"}`}>
 
  <Link to="/">Home</Link>
-    <Link to="/">Most Popular</Link>
+    <Link to="/posts?sort=popular">Most Popular</Link>
     <Link to="/">About</Link>
     
     <Link to="/">Trending</Link>
@@ -33,7 +33,7 @@ const Navbar=()=>{
 {/* desktop */}
 <div className="hidden md:flex items-center gap-8 xl:gap-12 font-medium">
   <Link to="/">Home</Link>
-    <Link to="/">Most Popular</Link>
+    <Link to="/posts?sort=popular">Most Popular</Link>
     <Link to="/">About</Link>
    
     <Link to="/">Trending</Link>

@@ -22,9 +22,10 @@ function Write() {
   const [img,setImg]=useState('');
   const [video,setVideo]=useState('');
 
- useEffect(() => {
-    img && setValue((prev) => prev + `<p><image src="${img.url}"/></p>`);
+useEffect(() => {
+    img && setValue((prev) => prev + `<p><img src="${img.url}" width="200" height="100"/></p>`);
   }, [img]);
+
 
   useEffect(() => {
     video &&

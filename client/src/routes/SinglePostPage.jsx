@@ -48,7 +48,7 @@ if(!data) return "post not found"
 
 
 <div className="flex flex-col md:flex-row gap-8">
-  <div className="lg:text-lg flex flex-col gap-6 text-justify" dangerouslySetInnerHTML={{__html: data?.content}}>
+  <div className="lg:text-lg flex flex-col gap-6 text-justify md:w-3/4" dangerouslySetInnerHTML={{__html: data?.content}}>
   </div>
   <div className="px-4 h-max sticky top-8">
     <h1 className=' mb-4 text-sm font-medium ' >Author</h1>

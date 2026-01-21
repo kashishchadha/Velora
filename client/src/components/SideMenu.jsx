@@ -11,11 +11,17 @@ const handleFilterChange=(e)=>{
 }
 }
 
+
  const handleCategoryChange = (category) => {
-    if (searchParams.get("cat") !== category) {
+    const newParams = Object.fromEntries(searchParams.entries());
+    
+    if (category === "general") {
+      delete newParams.cat;
+      setSearchParams(newParams);
+    } else if (searchParams.get("cat") !== category) {
       setSearchParams({
-        ...Object.fromEntries(searchParams.entries()),
-        cat:category,
+        ...newParams,
+        cat: category,
       });
     }
   };
