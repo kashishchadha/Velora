@@ -12,8 +12,7 @@ export const getPosts=async(req,res)=>{
   const sortQuery = req.query.sort;
   const featured = req.query.featured;
   
-  console.log("All query params:", req.query);
-  console.log("Sort query:", sortQuery);
+
 
   if (cat) {
     query.category = cat;
@@ -61,13 +60,9 @@ export const getPosts=async(req,res)=>{
     query.isFeatured=true
   }
   
-    const posts=await Post.find(query).limit(limit).skip((page-1)*limit).populate("user","username").sort(sortObj);
+    const posts=await Post.find(query).sort(sortObj).limit(limit).skip((page-1)*limit).populate("user","username");
     
-    
-    if(featured){
-      console.log("Featured posts isFeatured values:", posts.map(p => ({id: p._id, isFeatured: p.isFeatured})));
-    }
-    const totalPosts=await Post.countDocuments();
+    const totalPosts=await Post.countDocuments(query);
     const hasMore=page*limit<totalPosts;
 
 
@@ -85,27 +80,20 @@ export const getPost=async(req,res)=>{
 
 export const create=async (req,res,next)=>{
     try {
-         console.log("CREATE POST - Request body:", req.body);
          const {userId: clerkUserId}=await req.auth();
-         console.log("CREATE POST - Clerk User ID:", clerkUserId);
          if(!clerkUserId){
-            console.log("CREATE POST - No clerk user ID, returning 401");
             return res.status(401).json("not authenticated")
          }
          const user=await User.findOne({clerkId: clerkUserId});
          console.log("CREATE POST - User from DB:", user);
          if(!user){
-            console.log("CREATE POST - User not found in DB");
             return res.status(404).json("User not found. Please make sure your account is synced.")
          }
          
-         // Validate title exists and is not empty
          if(!req.body.title || req.body.title.trim() === ''){
-            console.log("CREATE POST - Title is empty, returning 400");
             return res.status(400).json("Title is required")
          }
          
-         console.log("CREATE POST - Generating slug");
          let slug=req.body.title.replace(/ /g,"-").toLowerCase();
          let existingPost=await Post.findOne({slug});
          let counter=2;
@@ -114,14 +102,10 @@ export const create=async (req,res,next)=>{
             existingPost=await Post.findOne({slug});
             counter++;
          }
-  console.log("CREATE POST - Slug generated:", slug);
   const newPost=new Post({user:user._id,slug,...req.body});
-  console.log("CREATE POST - Saving post");
   const post =await newPost.save();
-  console.log("CREATE POST - Post saved successfully:", post._id);
   res.status(200).json(post);
     } catch (error) {
-        console.error("CREATE POST ERROR:", error);
         return res.status(500).json({message: error.message || "Error creating post"});
     }
 }
