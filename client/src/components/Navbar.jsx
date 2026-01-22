@@ -6,7 +6,7 @@ import {SignedIn,SignedOut,SignInButton,UserButton} from '@clerk/clerk-react'
 const Navbar=()=>{
     const [open,setOpen]=useState(false)
     return(
-        <div  className="w-full h-16 md:h-20 flex items-center justify-between">
+        <div  className="w-full h-16 md:h-20 flex items-center justify-between overflow-x-hidden">
 <Link to="/" className=" flex items-center gap-4 text-2xl font-bold">
     <Image src="/plaintype/logo.png" alt="velora logo" w={32 } h={32}/>
     <span>Velora</span>
@@ -16,7 +16,7 @@ const Navbar=()=>{
         {open?"X":  "☰"}
     </div>
 
-    <div className={`w-full h-screen  flex flex-col items-center justify-center font-medium gap-8 text-lg absolute top-16   transition-all ease-in-out ${open?"-right-0":"-right-(100%)"}`}>
+    <div className={`w-full h-screen flex flex-col items-center justify-center font-medium gap-8 text-lg fixed top-16 left-0 bg-white transition-all ease-in-out z-50 ${open?"translate-x-0":"translate-x-full"}`}>
 
  <Link to="/">Home</Link>
     <Link to="/posts?sort=popular">Most Popular</Link>
