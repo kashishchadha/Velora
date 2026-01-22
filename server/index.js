@@ -47,7 +47,8 @@ app.use((error,req,res,next)=>{
         stack:error.stack
     })
 })
-app.listen(3000,()=>{
+const PORT = process.env.PORT || 3000;
+app.listen(PORT,()=>{
     connectDB();
-    console.log("server is running");
+    console.log(`server is running on port ${PORT}`);
 })
