@@ -8,12 +8,12 @@ function PostListItem({post}) {
   return (
     <div className='flex flex-col xl:flex-row gap-8 mb-12' >
       {post.img && (
-        <div className="md:hidden xl:block xl:w-1/3">
-        <Image src={post.img} className='rounded-2xl object-cover' w="400" h="259"></Image>
+        <div className="md:hidden xl:block xl:w-7/4">
+        <Image src={post.img} className='rounded-2xl object-cover'  ></Image>
         </div>
 )}
         <div className="flex flex-col gap-4">
-            <Link to={`/${post.slug}`}className='text-4xl font-semibold'>{post.title}</Link>
+            <Link to={`/${post.slug}`}className='text-3xl font-semibold'>{post.title}</Link>
 
             <div className="flex items-center gap-2 text-gray-400 text-sm">
                 <span>Written by</span>
