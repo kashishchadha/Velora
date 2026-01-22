@@ -63,9 +63,7 @@ export const getPosts=async(req,res)=>{
   
     const posts=await Post.find(query).limit(limit).skip((page-1)*limit).populate("user","username").sort(sortObj);
     
-    console.log("Found posts:", posts.length);
-    if(sortQuery === 'popular'){
-    }
+    
     if(featured){
       console.log("Featured posts isFeatured values:", posts.map(p => ({id: p._id, isFeatured: p.isFeatured})));
     }
