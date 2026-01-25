@@ -142,9 +142,7 @@ export const featurePost = async (req, res) => {
   const {userId: clerkUserId, sessionClaims} = await req.auth();
   const postId = req.body.postId;
 
-  console.log("Feature request - userId:", clerkUserId);
-  console.log("Feature request - sessionClaims:", JSON.stringify(sessionClaims, null, 2));
-  console.log("Feature request - postId:", postId);
+ 
 
   if (!clerkUserId) {
     return res.status(401).json("Not authenticated!");
@@ -152,7 +150,6 @@ export const featurePost = async (req, res) => {
 
   // Try to get role from publicMetadata first, then metadata
   const role = sessionClaims?.publicMetadata?.role || sessionClaims?.metadata?.role || "user";
-  console.log("Feature request - role:", role);
 
   if (role !== "admin") {
     return res.status(403).json("You cannot feature posts!");
@@ -165,7 +162,6 @@ export const featurePost = async (req, res) => {
   }
 
   const isFeatured = post.isFeatured;
-  console.log("Current isFeatured:", isFeatured, "Will change to:", !isFeatured);
 
   const updatedPost = await Post.findByIdAndUpdate(
     postId,
@@ -175,6 +171,5 @@ export const featurePost = async (req, res) => {
     { new: true }
   );
 
-  console.log("Post updated, new isFeatured:", updatedPost.isFeatured);
   res.status(200).json(updatedPost);
 };

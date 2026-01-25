@@ -8,7 +8,6 @@ export const clerkwebhook= async (req,res)=>{
         throw new Error("webhook secret needed")
     }
     
-    // Convert buffer to string for svix
     const payload = req.body.toString();
     const headers = {
         'svix-id': req.headers['svix-id'],
